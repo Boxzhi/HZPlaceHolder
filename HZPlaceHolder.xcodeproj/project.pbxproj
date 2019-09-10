@@ -108,16 +108,32 @@
 		E4F05FD52327A3A5002A46CC /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E4F05FD62327A3A5002A46CC /* HZPlaceHolderView.swift */,
+				E4F05FE72327AC5B002A46CC /* HZRefresh */,
+				E4F05FE62327AC3E002A46CC /* HZPlaceHolderView */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		E4F05FE62327AC3E002A46CC /* HZPlaceHolderView */ = {
+			isa = PBXGroup;
+			children = (
 				E4F05FD72327A3A5002A46CC /* UIButtonExtension.swift */,
 				E4F05FD92327A3A5002A46CC /* UILabelExtension.swift */,
+				E4F05FD62327A3A5002A46CC /* HZPlaceHolderView.swift */,
 				E4F05FDA2327A3A5002A46CC /* UITableviewExtension.swift */,
 				E4F05FDB2327A3A5002A46CC /* UICollectionViewExtension.swift */,
+			);
+			path = HZPlaceHolderView;
+			sourceTree = "<group>";
+		};
+		E4F05FE72327AC5B002A46CC /* HZRefresh */ = {
+			isa = PBXGroup;
+			children = (
 				E4F05FDC2327A3A5002A46CC /* UIScrollViewExtension.swift */,
 				E4F05FDD2327A3A5002A46CC /* HZRefreshNormalHeader.swift */,
 				E4F05FD82327A3A5002A46CC /* HZRefreshBackNormalFooter.swift */,
 			);
-			path = Source;
+			path = HZRefresh;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
