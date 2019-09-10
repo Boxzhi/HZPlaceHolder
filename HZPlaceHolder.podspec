@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name = 'HZPlaceHolder'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.license = 'MIT'
   s.summary = 'Quickly create a null data placeholder view'
   s.homepage = 'https://github.com/Boxzhi/HZPlaceHolder'
@@ -22,12 +22,12 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.swift_version = '5.0'
 
-  s.subspec 'HZPlaceHolderView' do |placeHolderView|
-    placeHolderView.source_files = 'Example/Source/HZPlaceHolderView/*.swift'
+  s.subspec 'PlaceHolderView' do |placeHolderView|
+    placeHolderView.source_files = 'Example/Source/PlaceHolderView/*.swift'
   end
 
-  s.subspec 'HZRefresh' do |refresh|
-    refresh.source_files = 'Example/Source/HZRefresh/*.swift'
+  s.subspec 'Refresh' do |refresh|
+    refresh.source_files = 'Example/Source/Refresh/*.swift'
     refresh.dependency 'MJRefresh'
   end
 
