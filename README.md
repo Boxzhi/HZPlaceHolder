@@ -1,7 +1,7 @@
 ![](https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/logo.png)
 
 
-[![Version](https://img.shields.io/badge/pod-1.0.1-blue.svg)](https://github.com/Boxzhi/HZPlaceHolder) [![Build Status](https://img.shields.io/badge/build-passing-green.svg)]()
+[![Version](https://img.shields.io/badge/pod-1.0.2-blue.svg)](https://github.com/Boxzhi/HZPlaceHolder) [![Build Status](https://img.shields.io/badge/build-passing-green.svg)]()
 ![](https://img.shields.io/badge/swift-4.2%2B-orange.svg)
 ![](https://img.shields.io/badge/platform-iOS%2010.0%2B-yellowgreen.svg) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/CoderZZHe/HZNavigationBar/blob/master/LICENSE)
 
@@ -32,10 +32,10 @@
 - parameter footerRefreshHandler:          footer刷新回调
 */
 ```
-tableViewGrouped.hz_normalRefreshWithHeaderFooter(true, refreshHeader: HZRefreshNormalHeader.self, refreshFooter: HZRefreshBackNormalFooter.self, headerRefreshHandler: {
-    print("下拉block")
+tableView.hz_normalRefreshWithHeaderFooter(true, refreshHeader: HZRefreshNormalHeader.self, refreshFooter: HZRefreshBackNormalFooter.self, headerRefreshHandler: {
+    print("下拉回调")
 }) {
-    print("上拉block")
+    print("上拉回调")
 }
 ```
 
@@ -54,10 +54,10 @@ gif刷新
 - parameter footerRefreshHandler:          footer刷新回调
 */
 ```
-tableViewGrouped.hz_gifRefreshWithHeaderFooter(true, refreshHeader: HZRefreshGifHeader.self, refreshFooter: HZRefreshGifFooter.self, headerRefreshHandler: {
-    print("下拉block")
+tableView.hz_gifRefreshWithHeaderFooter(true, refreshHeader: HZRefreshGifHeader.self, refreshFooter: HZRefreshGifFooter.self, headerRefreshHandler: {
+    print("下拉回调")
 }) {
-    print("上拉block")
+    print("上拉回调")
 }
 ```
 
