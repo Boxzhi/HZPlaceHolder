@@ -8,24 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		4EBF99D50E08F869110EF000 /* Pods_HZPlaceHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B0137D004833CC3BF1E999 /* Pods_HZPlaceHolder.framework */; };
+		E45C741723289D640067564B /* HZRefreshBackNormalFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C740E23289D640067564B /* HZRefreshBackNormalFooter.swift */; };
+		E45C741823289D640067564B /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C740F23289D640067564B /* UIScrollViewExtension.swift */; };
+		E45C741923289D640067564B /* HZRefreshNormalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741023289D640067564B /* HZRefreshNormalHeader.swift */; };
+		E45C741A23289D640067564B /* HZPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741223289D640067564B /* HZPlaceHolderView.swift */; };
+		E45C741B23289D640067564B /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741323289D640067564B /* UIButtonExtension.swift */; };
+		E45C741C23289D640067564B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741423289D640067564B /* UILabelExtension.swift */; };
+		E45C741D23289D640067564B /* UITableviewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741523289D640067564B /* UITableviewExtension.swift */; };
+		E45C741E23289D640067564B /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741623289D640067564B /* UICollectionViewExtension.swift */; };
 		E4F05FB223279F85002A46CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FB123279F85002A46CC /* AppDelegate.swift */; };
 		E4F05FB423279F85002A46CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FB323279F85002A46CC /* ViewController.swift */; };
 		E4F05FB723279F85002A46CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F05FB523279F85002A46CC /* Main.storyboard */; };
 		E4F05FB923279F86002A46CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4F05FB823279F86002A46CC /* Assets.xcassets */; };
 		E4F05FBC23279F86002A46CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F05FBA23279F86002A46CC /* LaunchScreen.storyboard */; };
-		E4F05FDE2327A3A5002A46CC /* HZPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FD62327A3A5002A46CC /* HZPlaceHolderView.swift */; };
-		E4F05FDF2327A3A5002A46CC /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FD72327A3A5002A46CC /* UIButtonExtension.swift */; };
-		E4F05FE02327A3A5002A46CC /* HZRefreshBackNormalFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FD82327A3A5002A46CC /* HZRefreshBackNormalFooter.swift */; };
-		E4F05FE12327A3A5002A46CC /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FD92327A3A5002A46CC /* UILabelExtension.swift */; };
-		E4F05FE22327A3A5002A46CC /* UITableviewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FDA2327A3A5002A46CC /* UITableviewExtension.swift */; };
-		E4F05FE32327A3A5002A46CC /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FDB2327A3A5002A46CC /* UICollectionViewExtension.swift */; };
-		E4F05FE42327A3A5002A46CC /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FDC2327A3A5002A46CC /* UIScrollViewExtension.swift */; };
-		E4F05FE52327A3A5002A46CC /* HZRefreshNormalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FDD2327A3A5002A46CC /* HZRefreshNormalHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		26B0137D004833CC3BF1E999 /* Pods_HZPlaceHolder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HZPlaceHolder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7B76DA87965862688514E73 /* Pods-HZPlaceHolder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZPlaceHolder.debug.xcconfig"; path = "Target Support Files/Pods-HZPlaceHolder/Pods-HZPlaceHolder.debug.xcconfig"; sourceTree = "<group>"; };
+		E45C740E23289D640067564B /* HZRefreshBackNormalFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZRefreshBackNormalFooter.swift; sourceTree = "<group>"; };
+		E45C740F23289D640067564B /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
+		E45C741023289D640067564B /* HZRefreshNormalHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZRefreshNormalHeader.swift; sourceTree = "<group>"; };
+		E45C741223289D640067564B /* HZPlaceHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZPlaceHolderView.swift; sourceTree = "<group>"; };
+		E45C741323289D640067564B /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		E45C741423289D640067564B /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		E45C741523289D640067564B /* UITableviewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableviewExtension.swift; sourceTree = "<group>"; };
+		E45C741623289D640067564B /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		E4F05FAE23279F85002A46CC /* HZPlaceHolder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZPlaceHolder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F05FB123279F85002A46CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4F05FB323279F85002A46CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,14 +41,6 @@
 		E4F05FB823279F86002A46CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4F05FBB23279F86002A46CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4F05FBD23279F86002A46CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E4F05FD62327A3A5002A46CC /* HZPlaceHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZPlaceHolderView.swift; sourceTree = "<group>"; };
-		E4F05FD72327A3A5002A46CC /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
-		E4F05FD82327A3A5002A46CC /* HZRefreshBackNormalFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZRefreshBackNormalFooter.swift; sourceTree = "<group>"; };
-		E4F05FD92327A3A5002A46CC /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
-		E4F05FDA2327A3A5002A46CC /* UITableviewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableviewExtension.swift; sourceTree = "<group>"; };
-		E4F05FDB2327A3A5002A46CC /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
-		E4F05FDC2327A3A5002A46CC /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
-		E4F05FDD2327A3A5002A46CC /* HZRefreshNormalHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZRefreshNormalHeader.swift; sourceTree = "<group>"; };
 		E883C263CE2668E7F953F0E7 /* Pods-HZPlaceHolder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZPlaceHolder.release.xcconfig"; path = "Target Support Files/Pods-HZPlaceHolder/Pods-HZPlaceHolder.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +71,28 @@
 				E883C263CE2668E7F953F0E7 /* Pods-HZPlaceHolder.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E45C740D23289D640067564B /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				E45C741023289D640067564B /* HZRefreshNormalHeader.swift */,
+				E45C740E23289D640067564B /* HZRefreshBackNormalFooter.swift */,
+				E45C740F23289D640067564B /* UIScrollViewExtension.swift */,
+			);
+			path = Refresh;
+			sourceTree = "<group>";
+		};
+		E45C741123289D640067564B /* PlaceHolderView */ = {
+			isa = PBXGroup;
+			children = (
+				E45C741223289D640067564B /* HZPlaceHolderView.swift */,
+				E45C741323289D640067564B /* UIButtonExtension.swift */,
+				E45C741423289D640067564B /* UILabelExtension.swift */,
+				E45C741523289D640067564B /* UITableviewExtension.swift */,
+				E45C741623289D640067564B /* UICollectionViewExtension.swift */,
+			);
+			path = PlaceHolderView;
 			sourceTree = "<group>";
 		};
 		E4F05FA523279F85002A46CC = {
@@ -108,32 +130,10 @@
 		E4F05FD52327A3A5002A46CC /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E4F05FE72327AC5B002A46CC /* HZRefresh */,
-				E4F05FE62327AC3E002A46CC /* HZPlaceHolderView */,
+				E45C741123289D640067564B /* PlaceHolderView */,
+				E45C740D23289D640067564B /* Refresh */,
 			);
 			path = Source;
-			sourceTree = "<group>";
-		};
-		E4F05FE62327AC3E002A46CC /* HZPlaceHolderView */ = {
-			isa = PBXGroup;
-			children = (
-				E4F05FD72327A3A5002A46CC /* UIButtonExtension.swift */,
-				E4F05FD92327A3A5002A46CC /* UILabelExtension.swift */,
-				E4F05FD62327A3A5002A46CC /* HZPlaceHolderView.swift */,
-				E4F05FDA2327A3A5002A46CC /* UITableviewExtension.swift */,
-				E4F05FDB2327A3A5002A46CC /* UICollectionViewExtension.swift */,
-			);
-			path = HZPlaceHolderView;
-			sourceTree = "<group>";
-		};
-		E4F05FE72327AC5B002A46CC /* HZRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				E4F05FDC2327A3A5002A46CC /* UIScrollViewExtension.swift */,
-				E4F05FDD2327A3A5002A46CC /* HZRefreshNormalHeader.swift */,
-				E4F05FD82327A3A5002A46CC /* HZRefreshBackNormalFooter.swift */,
-			);
-			path = HZRefresh;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,16 +251,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4F05FDE2327A3A5002A46CC /* HZPlaceHolderView.swift in Sources */,
-				E4F05FE22327A3A5002A46CC /* UITableviewExtension.swift in Sources */,
-				E4F05FE42327A3A5002A46CC /* UIScrollViewExtension.swift in Sources */,
-				E4F05FDF2327A3A5002A46CC /* UIButtonExtension.swift in Sources */,
-				E4F05FE02327A3A5002A46CC /* HZRefreshBackNormalFooter.swift in Sources */,
-				E4F05FE32327A3A5002A46CC /* UICollectionViewExtension.swift in Sources */,
+				E45C741D23289D640067564B /* UITableviewExtension.swift in Sources */,
+				E45C741A23289D640067564B /* HZPlaceHolderView.swift in Sources */,
+				E45C741723289D640067564B /* HZRefreshBackNormalFooter.swift in Sources */,
 				E4F05FB423279F85002A46CC /* ViewController.swift in Sources */,
-				E4F05FE12327A3A5002A46CC /* UILabelExtension.swift in Sources */,
+				E45C741E23289D640067564B /* UICollectionViewExtension.swift in Sources */,
 				E4F05FB223279F85002A46CC /* AppDelegate.swift in Sources */,
-				E4F05FE52327A3A5002A46CC /* HZRefreshNormalHeader.swift in Sources */,
+				E45C741C23289D640067564B /* UILabelExtension.swift in Sources */,
+				E45C741B23289D640067564B /* UIButtonExtension.swift in Sources */,
+				E45C741823289D640067564B /* UIScrollViewExtension.swift in Sources */,
+				E45C741923289D640067564B /* HZRefreshNormalHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
