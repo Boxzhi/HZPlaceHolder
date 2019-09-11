@@ -56,6 +56,48 @@ public extension UIButton {
     
 }
 
+public extension UIButton {
+    
+    /// UIButton设置圆角 (不传值默认切全圆)
+    func hz_buttonWithCornerRadius(radius: CGFloat = 0, corners: UIRectCorner = .allCorners, backgroundColor: UIColor? = nil) {
+        self.hz_buttonWithCornerRadiusBorder(radius: radius, corners: corners, backgroundColor: backgroundColor)
+    }
+    
+    /// UIButton设置圆角、边框
+    func hz_buttonWithCornerRadiusBorder(radius: CGFloat = 0, borderColor: UIColor? = nil, borderWidth: CGFloat = 0, corners: UIRectCorner = .allCorners, backgroundColor: UIColor? = nil) {
+        if radius == 0 {
+            self.layer.cornerRadius = self.bounds.size.height / 2.0
+        }else {
+            self.layer.cornerRadius = radius
+        }
+        
+        if let _borderColor = borderColor, borderWidth > 0 {
+            self.layer.borderWidth = borderWidth
+            self.layer.borderColor = _borderColor.cgColor
+        }
+        
+        var cornerMasks: CACornerMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        if !(corners.contains(.topLeft)) {
+            cornerMasks.remove(.layerMinXMinYCorner)
+        }
+        if !(corners.contains(.topRight)) {
+            cornerMasks.remove(.layerMaxXMinYCorner)
+        }
+        if !(corners.contains(.bottomLeft)) {
+            cornerMasks.remove(.layerMinXMaxYCorner)
+        }
+        if !(corners.contains(.bottomRight)) {
+            cornerMasks.remove(.layerMaxXMaxYCorner)
+        }
+        if let _backgroundColor = backgroundColor {
+            self.layer.backgroundColor = _backgroundColor.cgColor
+        }
+        self.layer.maskedCorners = cornerMasks
+        
+    }
+    
+}
+
 extension UIButton {
     
     override open var isHighlighted: Bool {
