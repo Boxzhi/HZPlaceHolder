@@ -3,7 +3,7 @@
 
 [![Version](https://img.shields.io/badge/pod-1.0.3-blue.svg)](https://github.com/Boxzhi/HZPlaceHolder) [![Build Status](https://img.shields.io/badge/build-passing-green.svg)]()
 ![](https://img.shields.io/badge/swift-4.2%2B-orange.svg)
-![](https://img.shields.io/badge/platform-iOS%2010.0%2B-yellowgreen.svg) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/CoderZZHe/HZNavigationBar/blob/master/LICENSE)
+![](https://img.shields.io/badge/platform-iOS%2010.0%2B-yellowgreen.svg) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Boxzhi/HZPlaceHolder/blob/master/LICENSE)
 
 
 
