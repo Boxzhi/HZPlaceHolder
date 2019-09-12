@@ -29,8 +29,8 @@
 - 第一步：UITableView或UICollectionView刷新调用 `hz_reloadData`
 - 第二步：UIViewController继承代理 `HZTableViewPlaceHolderDelegate` 或 `HZCollectionViewPlaceHolderDelegate`
 - 第三步：实现代理方法：
-- `func makePlaceHolderView() -> UIView?`  ---->  返回自定义View，也可使用 `HZPlaceHolderView`创建返回
-- `func enableScrollWhenPlaceHolderViewShowing() -> Bool`  ---->  当数据为空时是否可滚动，默认为true
+   - `func makePlaceHolderView() -> UIView?`  ---->  返回自定义View，也可使用 `HZPlaceHolderView`创建返回
+   - `func enableScrollWhenPlaceHolderViewShowing() -> Bool`  ---->  当数据为空时是否可滚动，默认为true
 
 PlaceHolderView中已封装了 `HZPlaceHolderView`，使用方法如下：
 ```
