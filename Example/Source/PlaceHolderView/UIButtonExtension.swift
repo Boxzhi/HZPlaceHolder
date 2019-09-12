@@ -17,15 +17,13 @@ public enum HZButtonEdgeInsetsStyle: Int {
 
 public extension UIButton {
     
-    convenience init(title: String, selectedTitle: String? = nil, titleColor:UIColor? = nil, selectedColor: UIColor? = nil, font: UIFont, backgroundColor: UIColor? = nil) {
+    convenience init(title: String, selectedTitle: String? = nil, titleColor: UIColor, selectedColor: UIColor? = nil, font: UIFont, backgroundColor: UIColor? = nil) {
         self.init()
         self.setTitle(title, for: .normal)
         if let _selectedTitle = selectedTitle {
             self.setTitle(_selectedTitle, for: .selected)
         }
-        if let _titleColor = titleColor {
-            self.setTitleColor(_titleColor, for: .normal)
-        }
+        self.setTitleColor(titleColor, for: .normal)
         if let _selectedColor = selectedColor {
             self.setTitleColor(_selectedColor, for: .selected)
         }
@@ -40,7 +38,7 @@ public extension UIButton {
         self.backgroundColor = backgroundColor
     }
     
-    convenience init(title: String, selectedTitle: String?, image: UIImage?, selectedImage: UIImage? = nil, backgroundColor: UIColor? = nil, style: HZButtonEdgeInsetsStyle = .top, space: CGFloat = 0) {
+    convenience init(title: String, selectedTitle: String? = nil, image: UIImage?, selectedImage: UIImage? = nil, backgroundColor: UIColor? = nil, style: HZButtonEdgeInsetsStyle = .top, space: CGFloat = 0) {
         self.init()
         self.setTitle(title, for: .normal)
         if let _selectedTitle = selectedTitle {
