@@ -1,7 +1,7 @@
 ![](https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/logo.png)
 
 
-[![Version](https://img.shields.io/badge/pod-1.0.3-blue.svg)](https://github.com/Boxzhi/HZPlaceHolder) [![Build Status](https://img.shields.io/badge/build-passing-green.svg)]()
+[![Version](https://img.shields.io/badge/pod-1.0.4-blue.svg)](https://github.com/Boxzhi/HZPlaceHolder) [![Build Status](https://img.shields.io/badge/build-passing-green.svg)]()
 ![](https://img.shields.io/badge/swift-4.2%2B-orange.svg)
 ![](https://img.shields.io/badge/platform-iOS%2010.0%2B-yellowgreen.svg) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Boxzhi/HZPlaceHolder/blob/master/LICENSE)
 
@@ -22,7 +22,7 @@
 # 用法
 
 ### PlaceHolderView.
-<!--<img width="400" src="https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/HZPlaceHolderView_1.png"/>    <img width="400" src="https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/HZPlaceHolderView_2.png"/>-->
+<img width="400" src="https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/HZPlaceHolderView_1.png"/>    <img width="400" src="https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/HZPlaceHolderView_2.png"/>
 <img width="400" src="https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/HZPlaceHolderView_3.png"/>    <img width="400" src="https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/HZPlaceHolderView_4.png"/>
 
 
