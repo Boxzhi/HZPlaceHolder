@@ -28,10 +28,9 @@ extension UIScrollView {
     }
     
     /// 上拉
-    public func hz_normalRefreshWithFooter<F: MJRefreshFooter>(_ isFirstRefresh: Bool = false,
-                                                               refreshFooter: F.Type = HZRefreshBackNormalFooter.self as! F.Type,
+    public func hz_normalRefreshWithFooter<F: MJRefreshFooter>(_ refreshFooter: F.Type = HZRefreshBackNormalFooter.self as! F.Type,
                                                                footerRefreshHandler: @escaping () -> Void) {
-        self.setNormalRefresh(isFirstRefresh, refreshFooter: refreshFooter, footerRefreshHandler: footerRefreshHandler)
+        self.setNormalRefresh(refreshFooter: refreshFooter, footerRefreshHandler: footerRefreshHandler)
     }
     
     fileprivate func setNormalRefresh<H: MJRefreshNormalHeader, F: MJRefreshFooter>(_ isFirstRefresh: Bool = false,
@@ -72,10 +71,9 @@ extension UIScrollView {
     }
     
     /// 上拉
-    public func hz_gifRefreshWithFooter<F: MJRefreshBackGifFooter>(_ isFirstRefresh: Bool = false,
-                                                                   refreshFooter: F.Type,
+    public func hz_gifRefreshWithFooter<F: MJRefreshBackGifFooter>(_ refreshFooter: F.Type,
                                                                    footerRefreshHandler: @escaping () -> Void) {
-        self.setGifRefresh(isFirstRefresh, refreshFooter: refreshFooter, footerRefreshHandler: footerRefreshHandler)
+        self.setGifRefresh(refreshFooter: refreshFooter, footerRefreshHandler: footerRefreshHandler)
     }
     
     fileprivate func setGifRefresh<H: MJRefreshGifHeader, F: MJRefreshBackGifFooter>(_ isFirstRefresh: Bool = false,
