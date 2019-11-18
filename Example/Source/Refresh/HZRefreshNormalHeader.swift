@@ -18,7 +18,7 @@ public class HZRefreshNormalHeader: MJRefreshNormalHeader {
         self.setTitle("下拉刷新", for: .idle)
         self.setTitle("松开刷新", for: .pulling)
         self.setTitle("刷新中", for: .refreshing)
-        self.stateLabel.font = UIFont.systemFont(ofSize: 13)
+        self.stateLabel?.font = UIFont.systemFont(ofSize: 13)
     }
     
 }

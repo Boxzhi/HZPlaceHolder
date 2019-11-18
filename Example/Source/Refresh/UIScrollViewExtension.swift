@@ -43,7 +43,7 @@ extension UIScrollView {
                 _headerRefreshHandler()
             })
             if isFirstRefresh {
-                self.mj_header.beginRefreshing()
+                self.mj_header?.beginRefreshing()
             }
         }
         if let _refreshFooter = refreshFooter, let _footerRefreshHandler = footerRefreshHandler {
@@ -86,7 +86,7 @@ extension UIScrollView {
                 _headerRefreshHandler()
             })
             if isFirstRefresh {
-                self.mj_header.beginRefreshing()
+                self.mj_header?.beginRefreshing()
             }
         }
         if let _refreshFooter = refreshFooter, let _footerRefreshHandler = footerRefreshHandler {
