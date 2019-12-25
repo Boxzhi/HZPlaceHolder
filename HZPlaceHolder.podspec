@@ -25,11 +25,11 @@ Pod::Spec.new do |s|
   # s.default_subspec = 'PlaceHolderView'
 
   s.subspec 'PlaceHolderView' do |placeHolderView|
-    placeHolderView.source_files = 'Example/Source/PlaceHolderView/*.swift'
+    placeHolderView.source_files = 'HZPlaceHolder/PlaceHolderView/*.swift'
   end
 
   s.subspec 'Refresh' do |refresh|
-    refresh.source_files = 'Example/Source/Refresh/*.swift'
+    refresh.source_files = 'HZPlaceHolder/Refresh/*.swift'
     refresh.dependency 'MJRefresh'
   end
 

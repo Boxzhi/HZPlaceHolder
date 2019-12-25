@@ -8,39 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		4EBF99D50E08F869110EF000 /* Pods_HZPlaceHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B0137D004833CC3BF1E999 /* Pods_HZPlaceHolder.framework */; };
-		E45C741723289D640067564B /* HZRefreshBackNormalFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C740E23289D640067564B /* HZRefreshBackNormalFooter.swift */; };
-		E45C741823289D640067564B /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C740F23289D640067564B /* UIScrollViewExtension.swift */; };
-		E45C741923289D640067564B /* HZRefreshNormalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741023289D640067564B /* HZRefreshNormalHeader.swift */; };
-		E45C741A23289D640067564B /* HZPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741223289D640067564B /* HZPlaceHolderView.swift */; };
-		E45C741B23289D640067564B /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741323289D640067564B /* UIButtonExtension.swift */; };
-		E45C741C23289D640067564B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741423289D640067564B /* UILabelExtension.swift */; };
-		E45C741D23289D640067564B /* UITableviewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741523289D640067564B /* UITableviewExtension.swift */; };
-		E45C741E23289D640067564B /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C741623289D640067564B /* UICollectionViewExtension.swift */; };
-		E4F05FB223279F85002A46CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FB123279F85002A46CC /* AppDelegate.swift */; };
-		E4F05FB423279F85002A46CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F05FB323279F85002A46CC /* ViewController.swift */; };
-		E4F05FB723279F85002A46CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F05FB523279F85002A46CC /* Main.storyboard */; };
-		E4F05FB923279F86002A46CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4F05FB823279F86002A46CC /* Assets.xcassets */; };
-		E4F05FBC23279F86002A46CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F05FBA23279F86002A46CC /* LaunchScreen.storyboard */; };
+		E4812C6D23B3285A0036EC92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4812C6523B3285A0036EC92 /* ViewController.swift */; };
+		E4812C6E23B3285A0036EC92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4812C6623B3285A0036EC92 /* Assets.xcassets */; };
+		E4812C6F23B3285A0036EC92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4812C6723B3285A0036EC92 /* LaunchScreen.storyboard */; };
+		E4812C7023B3285A0036EC92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4812C6923B3285A0036EC92 /* Main.storyboard */; };
+		E4812C7123B3285A0036EC92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4812C6B23B3285A0036EC92 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		26B0137D004833CC3BF1E999 /* Pods_HZPlaceHolder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HZPlaceHolder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7B76DA87965862688514E73 /* Pods-HZPlaceHolder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZPlaceHolder.debug.xcconfig"; path = "Target Support Files/Pods-HZPlaceHolder/Pods-HZPlaceHolder.debug.xcconfig"; sourceTree = "<group>"; };
-		E45C740E23289D640067564B /* HZRefreshBackNormalFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZRefreshBackNormalFooter.swift; sourceTree = "<group>"; };
-		E45C740F23289D640067564B /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
-		E45C741023289D640067564B /* HZRefreshNormalHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZRefreshNormalHeader.swift; sourceTree = "<group>"; };
-		E45C741223289D640067564B /* HZPlaceHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZPlaceHolderView.swift; sourceTree = "<group>"; };
-		E45C741323289D640067564B /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
-		E45C741423289D640067564B /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
-		E45C741523289D640067564B /* UITableviewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableviewExtension.swift; sourceTree = "<group>"; };
-		E45C741623289D640067564B /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		E4812C6523B3285A0036EC92 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E4812C6623B3285A0036EC92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E4812C6823B3285A0036EC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E4812C6A23B3285A0036EC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E4812C6B23B3285A0036EC92 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E4812C6C23B3285A0036EC92 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4F05FAE23279F85002A46CC /* HZPlaceHolder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZPlaceHolder.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4F05FB123279F85002A46CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E4F05FB323279F85002A46CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E4F05FB623279F85002A46CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E4F05FB823279F86002A46CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E4F05FBB23279F86002A46CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E4F05FBD23279F86002A46CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E883C263CE2668E7F953F0E7 /* Pods-HZPlaceHolder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZPlaceHolder.release.xcconfig"; path = "Target Support Files/Pods-HZPlaceHolder/Pods-HZPlaceHolder.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,32 +57,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		E45C740D23289D640067564B /* Refresh */ = {
+		E4812C6423B3285A0036EC92 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E45C741023289D640067564B /* HZRefreshNormalHeader.swift */,
-				E45C740E23289D640067564B /* HZRefreshBackNormalFooter.swift */,
-				E45C740F23289D640067564B /* UIScrollViewExtension.swift */,
+				E4812C6523B3285A0036EC92 /* ViewController.swift */,
+				E4812C6623B3285A0036EC92 /* Assets.xcassets */,
+				E4812C6723B3285A0036EC92 /* LaunchScreen.storyboard */,
+				E4812C6923B3285A0036EC92 /* Main.storyboard */,
+				E4812C6B23B3285A0036EC92 /* AppDelegate.swift */,
+				E4812C6C23B3285A0036EC92 /* Info.plist */,
 			);
-			path = Refresh;
-			sourceTree = "<group>";
-		};
-		E45C741123289D640067564B /* PlaceHolderView */ = {
-			isa = PBXGroup;
-			children = (
-				E45C741223289D640067564B /* HZPlaceHolderView.swift */,
-				E45C741323289D640067564B /* UIButtonExtension.swift */,
-				E45C741423289D640067564B /* UILabelExtension.swift */,
-				E45C741523289D640067564B /* UITableviewExtension.swift */,
-				E45C741623289D640067564B /* UICollectionViewExtension.swift */,
-			);
-			path = PlaceHolderView;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		E4F05FA523279F85002A46CC = {
 			isa = PBXGroup;
 			children = (
-				E4F05FB023279F85002A46CC /* Example */,
+				E4812C6423B3285A0036EC92 /* Classes */,
 				E4F05FAF23279F85002A46CC /* Products */,
 				C31CB17DC9A8C593D56C64FD /* Pods */,
 				658A1ED2571A9149B80BBCB5 /* Frameworks */,
@@ -111,29 +86,6 @@
 				E4F05FAE23279F85002A46CC /* HZPlaceHolder.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		E4F05FB023279F85002A46CC /* Example */ = {
-			isa = PBXGroup;
-			children = (
-				E4F05FD52327A3A5002A46CC /* Source */,
-				E4F05FB123279F85002A46CC /* AppDelegate.swift */,
-				E4F05FB323279F85002A46CC /* ViewController.swift */,
-				E4F05FB523279F85002A46CC /* Main.storyboard */,
-				E4F05FB823279F86002A46CC /* Assets.xcassets */,
-				E4F05FBA23279F86002A46CC /* LaunchScreen.storyboard */,
-				E4F05FBD23279F86002A46CC /* Info.plist */,
-			);
-			path = Example;
-			sourceTree = "<group>";
-		};
-		E4F05FD52327A3A5002A46CC /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				E45C741123289D640067564B /* PlaceHolderView */,
-				E45C740D23289D640067564B /* Refresh */,
-			);
-			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,9 +148,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4F05FBC23279F86002A46CC /* LaunchScreen.storyboard in Resources */,
-				E4F05FB923279F86002A46CC /* Assets.xcassets in Resources */,
-				E4F05FB723279F85002A46CC /* Main.storyboard in Resources */,
+				E4812C7023B3285A0036EC92 /* Main.storyboard in Resources */,
+				E4812C6E23B3285A0036EC92 /* Assets.xcassets in Resources */,
+				E4812C6F23B3285A0036EC92 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,36 +203,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E45C741D23289D640067564B /* UITableviewExtension.swift in Sources */,
-				E45C741A23289D640067564B /* HZPlaceHolderView.swift in Sources */,
-				E45C741723289D640067564B /* HZRefreshBackNormalFooter.swift in Sources */,
-				E4F05FB423279F85002A46CC /* ViewController.swift in Sources */,
-				E45C741E23289D640067564B /* UICollectionViewExtension.swift in Sources */,
-				E4F05FB223279F85002A46CC /* AppDelegate.swift in Sources */,
-				E45C741C23289D640067564B /* UILabelExtension.swift in Sources */,
-				E45C741B23289D640067564B /* UIButtonExtension.swift in Sources */,
-				E45C741823289D640067564B /* UIScrollViewExtension.swift in Sources */,
-				E45C741923289D640067564B /* HZRefreshNormalHeader.swift in Sources */,
+				E4812C7123B3285A0036EC92 /* AppDelegate.swift in Sources */,
+				E4812C6D23B3285A0036EC92 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E4F05FB523279F85002A46CC /* Main.storyboard */ = {
+		E4812C6723B3285A0036EC92 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E4F05FB623279F85002A46CC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E4F05FBA23279F86002A46CC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4F05FBB23279F86002A46CC /* Base */,
+				E4812C6823B3285A0036EC92 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E4812C6923B3285A0036EC92 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4812C6A23B3285A0036EC92 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -409,7 +353,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AVVHC4G6JC;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Classes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -417,7 +361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yantu.HZPlaceHolder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -428,7 +372,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AVVHC4G6JC;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Classes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -436,7 +380,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yantu.HZPlaceHolder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

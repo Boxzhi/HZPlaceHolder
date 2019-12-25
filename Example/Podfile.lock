@@ -1,0 +1,26 @@
+PODS:
+  - HZPlaceHolder/PlaceHolderView (1.0.5)
+  - HZPlaceHolder/Refresh (1.0.5):
+    - MJRefresh
+  - MJRefresh (3.2.2)
+
+DEPENDENCIES:
+  - HZPlaceHolder/PlaceHolderView (from `../`)
+  - HZPlaceHolder/Refresh (from `../`)
+  - MJRefresh
+
+SPEC REPOS:
+  trunk:
+    - MJRefresh
+
+EXTERNAL SOURCES:
+  HZPlaceHolder:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  HZPlaceHolder: 0a61ff4e03fbcbf6296772e266a286d70f51b543
+  MJRefresh: 72a46ecaa2a0feaf48fc5198dff95f25f8bb27c6
+
+PODFILE CHECKSUM: c90b5d5c30cdf0d7bc39ad681ef9cc45fd12a4ac
+
+COCOAPODS: 1.8.4

@@ -1,6 +1,0 @@
-framework module Pods_HZPlaceHolder {
-  umbrella header "Pods-HZPlaceHolder-umbrella.h"
-
-  export *
-  module * { export * }
-}
