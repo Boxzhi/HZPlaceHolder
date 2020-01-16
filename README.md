@@ -69,12 +69,16 @@ public class func createWithTwoButton(_ titleString: String, titleColor: UIColor
 
 ### Refresh.
 
-/// normal刷新
- // parameter isFirstRefresh:          第一次是否自动刷新
- // parameter refreshHeader:          刷新的refreshHeader
- // parameter refreshFooter:          刷新的refreshFooter
- // parameter headerRefreshHandler:          header刷新回调
- // parameter footerRefreshHandler:          footer刷新回调
+```
+/**
+normal刷新
+- parameter isFirstRefresh:          第一次是否自动刷新
+- parameter refreshHeader:          刷新的refreshHeader
+- parameter refreshFooter:          刷新的refreshFooter
+- parameter headerRefreshHandler:          header刷新回调
+- parameter footerRefreshHandler:          footer刷新回调
+*/
+```
 
 
 - 只有下拉 -> `tableView.hz.normalRefreshWithHeader`
@@ -87,14 +91,16 @@ public class func createWithTwoButton(_ titleString: String, titleColor: UIColor
 
 
 
-
-
-/// gif刷新
- // parameter isFirstRefresh:          第一次是否自动刷新
- // parameter refreshHeader:          刷新的refreshHeader
- // parameter refreshFooter:          刷新的refreshFooter
- // parameter headerRefreshHandler:          header刷新回调
- // parameter footerRefreshHandler:          footer刷新回调
+```
+/**
+gif刷新
+- parameter isFirstRefresh:          第一次是否自动刷新
+- parameter refreshHeader:          刷新的refreshHeader
+- parameter refreshFooter:          刷新的refreshFooter
+- parameter headerRefreshHandler:          header刷新回调
+- parameter footerRefreshHandler:          footer刷新回调
+*/
+```
 
 
 - 只有下拉 -> `tableView.hz.gifRefreshWithHeader`
