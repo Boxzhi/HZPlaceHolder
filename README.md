@@ -70,44 +70,38 @@ public class func createWithTwoButton(_ titleString: String, titleColor: UIColor
 ### Refresh.
 
 /**
-默认刷新
+normal刷新
 
 - parameter isFirstRefresh:          第一次是否自动刷新
-- parameter refreshHeader:          刷新的mj_header (不传用默认)
-- parameter refreshFooter:          刷新的refreshFooter (不传用默认)
+- parameter refreshHeader:          刷新的refreshHeader
+- parameter refreshFooter:          刷新的refreshFooter
 - parameter headerRefreshHandler:          header刷新回调
 - parameter footerRefreshHandler:          footer刷新回调
 */
-```
-tableView.hz_normalRefreshWithHeaderFooter(true, refreshHeader: HZRefreshNormalHeader.self, refreshFooter: HZRefreshBackNormalFooter.self, headerRefreshHandler: {
-print("下拉回调")
-}) {
-print("上拉回调")
-}
-```
 
-- 上下拉都有用 `hz_normalRefreshWithHeaderFooter`
-- 只有下拉用 `hz_normalRefreshWithHeader`
-- 只有上拉用 `hz_normalRefreshWithFooter`
+- 只有下拉 -> `tableView.hz.normalRefreshWithHeader`
+- 带BackNormalFooter
+  - 上下拉 -> `tableView.hz.normalRefreshWithHeaderBackFooter`
+  - 上拉 -> `tableView.hz.normalRefreshWithBackFooter`
+- 带AutoNormalFooter
+  - 上下拉 -> `tableView.hz.normalRefreshWithHeaderAutoFooter`
+  - 上拉 -> `tableView.hz.normalRefreshWithAutoFooter`
 
 
 /**
 gif刷新
 
 - parameter isFirstRefresh:          第一次是否自动刷新
-- parameter refreshHeader:          刷新的mj_header
+- parameter refreshHeader:          刷新的refreshHeader
 - parameter refreshFooter:          刷新的refreshFooter
 - parameter headerRefreshHandler:          header刷新回调
 - parameter footerRefreshHandler:          footer刷新回调
 */
-```
-tableView.hz_gifRefreshWithHeaderFooter(true, refreshHeader: HZRefreshGifHeader.self, refreshFooter: HZRefreshGifFooter.self, headerRefreshHandler: {
-print("下拉回调")
-}) {
-print("上拉回调")
-}
-```
 
-- 上下拉都有用 `hz_gifRefreshWithHeaderFooter`
-- 只有下拉用 `hz_gifRefreshWithHeader`
-- 只有上拉用 `hz_gifRefreshWithFooter`
+- 只有下拉 -> `tableView.hz.gifRefreshWithHeader`
+- 带BackGifFooter
+  - 上下拉 -> `tableView.hz.gifRefreshWithHeaderBackFooter`
+  - 上拉 -> `tableView.hz.gifRefreshWithBackFooter`
+- 带AutoGifFooter
+  - 上下拉 -> `tableView.hz.gifRefreshWithHeaderAutoFooter`
+  - 上拉 -> `tableView.hz.gifRefreshWithAutoFooter`
