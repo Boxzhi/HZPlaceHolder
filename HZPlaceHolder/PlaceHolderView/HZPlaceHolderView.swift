@@ -13,6 +13,9 @@ public enum HZButtonLayoutType {
     case topBottom
 }
 
+public typealias HZPlaceHolderViewClickButtonHandler = ((_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void)
+public typealias HZPlaceHolderViewClickBackgroundHandler = ((_ placeHolderView: HZPlaceHolderView) -> Void)
+
 public class HZPlaceHolderView: UIView {
 
     fileprivate var titleString: String?
@@ -22,31 +25,32 @@ public class HZPlaceHolderView: UIView {
     fileprivate var image: UIImage?
     fileprivate var previousButton: UIButton?
     fileprivate var nextButton: UIButton?
-    fileprivate var clickPreviousButtonHandler: ((_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void)?
-    fileprivate var clickNextButtonHandler: ((_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void)?
+    fileprivate var clickPreviousButtonHandler: HZPlaceHolderViewClickButtonHandler?
+    fileprivate var clickNextButtonHandler: HZPlaceHolderViewClickButtonHandler?
     fileprivate var buttonLayoutType: HZButtonLayoutType?
     fileprivate var buttonSpace: CGFloat = 25.0
     fileprivate var buttonSize: CGSize?
     
     fileprivate var imageWidth: CGFloat = 0
     fileprivate var imageHeight: CGFloat = 0
+    fileprivate var clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler?
     
     /// 图片 and 文字
-    public class func createWithoutButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, backgroundColor: UIColor = .white) -> HZPlaceHolderView? {
-        return HZPlaceHolderView(titleString, titleColor: titleColor, titleFont: titleFont, centerYOffset: centerYOffset, image: image, backgroundColor: backgroundColor)
+    public class func createWithoutButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, backgroundColor: UIColor = .white, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? = nil) -> HZPlaceHolderView? {
+        return HZPlaceHolderView(titleString, titleColor: titleColor, titleFont: titleFont, centerYOffset: centerYOffset, image: image, backgroundColor: backgroundColor, clickBackgroundHandler: clickBackgroundHandler)
     }
     
     /// 图片 and 文字 and 一个按钮
-    public class func createWithOneButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, button: UIButton, clickButtonHandler: @escaping (_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), backgroundColor: UIColor = .white) -> HZPlaceHolderView? {
-        return HZPlaceHolderView(titleString, titleColor: titleColor, titleFont: titleFont, centerYOffset: centerYOffset, image: image, previousButton: button, clickPreviousButtonHandler: clickButtonHandler, buttonSize: buttonSize, backgroundColor: backgroundColor)
+    public class func createWithOneButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, button: UIButton, clickButtonHandler: @escaping HZPlaceHolderViewClickButtonHandler, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), backgroundColor: UIColor = .white, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? = nil) -> HZPlaceHolderView? {
+        return HZPlaceHolderView(titleString, titleColor: titleColor, titleFont: titleFont, centerYOffset: centerYOffset, image: image, previousButton: button, clickPreviousButtonHandler: clickButtonHandler, buttonSize: buttonSize, backgroundColor: backgroundColor, clickBackgroundHandler: clickBackgroundHandler)
     }
     
     /// 图片 and 文字 and 两个按钮
-    public class func createWithTwoButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, previousButton: UIButton, clickPreviousButtonHandler: @escaping (_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void, nextButton: UIButton, clickNextButtonHandler: @escaping (_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void, buttonLayoutType: HZButtonLayoutType = .leftRight, buttonSpace: CGFloat = 25.0, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), backgroundColor: UIColor = .white) -> HZPlaceHolderView? {
-        return HZPlaceHolderView(titleString, titleColor: titleColor, titleFont: titleFont, centerYOffset: centerYOffset, image: image, previousButton: previousButton, clickPreviousButtonHandler: clickPreviousButtonHandler, nextButton: nextButton, clickNextButtonHandler: clickNextButtonHandler, buttonLayoutType: buttonLayoutType, buttonSpace: buttonSpace, buttonSize: buttonSize, backgroundColor: backgroundColor)
+    public class func createWithTwoButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, previousButton: UIButton, clickPreviousButtonHandler: @escaping HZPlaceHolderViewClickButtonHandler, nextButton: UIButton, clickNextButtonHandler: @escaping HZPlaceHolderViewClickButtonHandler, buttonLayoutType: HZButtonLayoutType = .leftRight, buttonSpace: CGFloat = 25.0, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), backgroundColor: UIColor = .white, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? = nil) -> HZPlaceHolderView? {
+        return HZPlaceHolderView(titleString, titleColor: titleColor, titleFont: titleFont, centerYOffset: centerYOffset, image: image, previousButton: previousButton, clickPreviousButtonHandler: clickPreviousButtonHandler, nextButton: nextButton, clickNextButtonHandler: clickNextButtonHandler, buttonLayoutType: buttonLayoutType, buttonSpace: buttonSpace, buttonSize: buttonSize, backgroundColor: backgroundColor, clickBackgroundHandler: clickBackgroundHandler)
     }
     
-    fileprivate init(_ titleString: String, titleColor: UIColor?, titleFont: UIFont?, centerYOffset: CGFloat, image: Any, previousButton: UIButton? = nil, clickPreviousButtonHandler: ((_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void)? = nil, nextButton: UIButton? = nil, clickNextButtonHandler: ((_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void)? = nil, buttonLayoutType: HZButtonLayoutType? = nil, buttonSpace: CGFloat? = nil, buttonSize: CGSize? = nil, backgroundColor: UIColor) {
+    fileprivate init(_ titleString: String, titleColor: UIColor?, titleFont: UIFont?, centerYOffset: CGFloat, image: Any, previousButton: UIButton? = nil, clickPreviousButtonHandler: ((_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void)? = nil, nextButton: UIButton? = nil, clickNextButtonHandler: ((_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void)? = nil, buttonLayoutType: HZButtonLayoutType? = nil, buttonSpace: CGFloat? = nil, buttonSize: CGSize? = nil, backgroundColor: UIColor, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? = nil) {
         super.init(frame: .zero)
         
         self.titleString = titleString
@@ -80,6 +84,7 @@ public class HZPlaceHolderView: UIView {
         }
         
         self.backgroundColor = backgroundColor
+        self.clickBackgroundHandler = clickBackgroundHandler
         setupUI()
     }
     
@@ -89,7 +94,7 @@ public class HZPlaceHolderView: UIView {
     
     fileprivate func setupUI() {
 
-        // 占位文字
+        // 占位Label
         let titleLabel = UILabel(text: titleString, textColor: titleColor, font: titleFont, textAlignment: .center)
         titleLabel.numberOfLines = 0
         self.addSubview(titleLabel)
@@ -99,7 +104,7 @@ public class HZPlaceHolderView: UIView {
         let titleLabelCenterY = NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: centerYOffset)
         addConstraints([titleLabelLeading, titleLabelTrailing, titleLabelCenterY])
         
-        // 占位图片
+        // 占位ImageView
         let imageView = UIImageView(image: self.image)
         self.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +114,25 @@ public class HZPlaceHolderView: UIView {
         let imageViewBottom = NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: titleLabel, attribute: .top, multiplier: 1.0, constant: -10)
         addConstraints([imageViewCenterX, imageViewWidth, imageViewHeight, imageViewBottom])
         
-        // 占位按钮
+        if clickBackgroundHandler != nil {
+            // 交互背景View
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = .clear
+            let tap = UITapGestureRecognizer(target: self, action: #selector(clickBackgroundAction(_:)))
+            tap.numberOfTapsRequired = 1
+            tap.numberOfTouchesRequired = 1
+            backgroundView.isUserInteractionEnabled = true
+            backgroundView.addGestureRecognizer(tap)
+            self.addSubview(backgroundView)
+            backgroundView.translatesAutoresizingMaskIntoConstraints = false
+            let backgroundViewTop = NSLayoutConstraint(item: backgroundView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0)
+            let backgroundViewBottom = NSLayoutConstraint(item: backgroundView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0)
+            let backgroundViewLeft = NSLayoutConstraint( item: backgroundView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 0)
+            let backgroundViewRight = NSLayoutConstraint(item: backgroundView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: 0)
+            addConstraints([backgroundViewTop, backgroundViewBottom, backgroundViewLeft, backgroundViewRight])
+        }
+        
+        // 占位Button
         if let _buttonSize = buttonSize, let _previousButton = previousButton {
             _previousButton.addTarget(self, action: #selector(clickPreviousButtonAction(_:)), for: .touchUpInside)
             self.addSubview(_previousButton)
@@ -137,6 +160,12 @@ public class HZPlaceHolderView: UIView {
 }
 
 extension HZPlaceHolderView {
+    
+    @objc fileprivate func clickBackgroundAction(_ tap: UITapGestureRecognizer) {
+        if let _clickBackgroundHandler = clickBackgroundHandler {
+            _clickBackgroundHandler(self)
+        }
+    }
     
     @objc fileprivate func clickPreviousButtonAction(_ sender: UIButton) {
         if let _clickPreviousButtonHandler = clickPreviousButtonHandler {
