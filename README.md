@@ -1,7 +1,7 @@
 ![](https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/logo.png)
 
 
-[![Version](https://img.shields.io/badge/pod-1.0.6-blue.svg)](https://github.com/Boxzhi/HZPlaceHolder) [![Build Status](https://img.shields.io/badge/build-passing-green.svg)]()
+[![Version](https://img.shields.io/badge/pod-1.0.7-blue.svg)](https://github.com/Boxzhi/HZPlaceHolder) [![Build Status](https://img.shields.io/badge/build-passing-green.svg)]()
 ![](https://img.shields.io/badge/swift-4.2%2B-orange.svg)
 ![](https://img.shields.io/badge/platform-iOS%2010.0%2B-yellowgreen.svg) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Boxzhi/HZPlaceHolder/blob/master/LICENSE)
 
@@ -48,19 +48,20 @@ PlaceHolderView中已封装了 `HZPlaceHolderView`，使用方法如下：
 - parameter buttonSpace:    两个按钮间的间距(默认25)
 - parameter buttonSize:    按钮的Size(默认宽为120,高为44)
 - parameter backgroundColor:    占位View的背景（默认白色）
+- parameter clickBackgroundHandler:    背景点击回调
 */
 ```
 - 图片 and 文字，使用：
 ```
-public class func createWithoutButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, backgroundColor: UIColor = .white) -> HZPlaceHolderView?
+public class func createWithoutButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, backgroundColor: UIColor = .white, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? = nil) -> HZPlaceHolderView?
 ```
 - 图片 and 文字 and 一个按钮，使用：
 ```
-public class func createWithOneButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, button: UIButton, clickButtonHandler: @escaping (_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), backgroundColor: UIColor = .white) -> HZPlaceHolderView?
+public class func createWithOneButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, button: UIButton, clickButtonHandler: @escaping HZPlaceHolderViewClickButtonHandler, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), backgroundColor: UIColor = .white, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? = nil) -> HZPlaceHolderView?
 ```
 - 图片 and 文字 and 两个按钮，使用：
 ```
-public class func createWithTwoButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, previousButton: UIButton, clickPreviousButtonHandler: @escaping (_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void, nextButton: UIButton, clickNextButtonHandler: @escaping (_ button: UIButton, _ placeHolderView: HZPlaceHolderView) -> Void, buttonLayoutType: HZButtonLayoutType = .leftRight, buttonSpace: CGFloat = 25.0, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), backgroundColor: UIColor = .white) -> HZPlaceHolderView?
+public class func createWithTwoButton(_ titleString: String, titleColor: UIColor? = nil, titleFont: UIFont? = nil, centerYOffset: CGFloat = 0, image: Any, previousButton: UIButton, clickPreviousButtonHandler: @escaping HZPlaceHolderViewClickButtonHandler, nextButton: UIButton, clickNextButtonHandler: @escaping HZPlaceHolderViewClickButtonHandler, buttonLayoutType: HZButtonLayoutType = .leftRight, buttonSpace: CGFloat = 25.0, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), backgroundColor: UIColor = .white, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? = nil) -> HZPlaceHolderView?
 ```
 
 
