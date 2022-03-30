@@ -76,7 +76,7 @@ public class HZTableViewModel: NSObject {
     public var scrollViewDidChangeAdjustedContentInsetHandler: HZScrollViewHandler?
     
     //MARK: 初始化
-    override init() {
+    public override init() {
         super.init()
         self.sectionModelArray = []
     }
@@ -546,7 +546,7 @@ public class HZTableViewSectionModel: NSObject {
     public var titleForHeaderInSectionHandler: HZSectionTitleForHeaderFooterInSectionHandler?
     public var titleForFooterInSectionHandler: HZSectionTitleForHeaderFooterInSectionHandler?
     
-    override init() {
+    public override init() {
         super.init()
         self.headerHeight = UITableView.automaticDimension
         self.footerHeight = UITableView.automaticDimension
