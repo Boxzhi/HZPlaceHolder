@@ -55,7 +55,7 @@ PlaceHolderView中已封装了 `HZPlaceHolderView`，使用方法如下：
     ///   - afterButton: 后按钮
     ///   - clickAfterButtonHandler: 后按钮点击事件回调
     ///   - buttonSize: 按钮宽高
-    ///   - baSpace: 俩按钮间距
+    ///   - buttonSpace: 俩按钮间距
     ///   - buttonLayoutType: 俩按钮布局样式
     ///   - backgroundColor: 背景色
     ///   - clickBackgroundHandler: 背景点击事件回调
