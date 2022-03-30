@@ -89,9 +89,8 @@ public class HZPlaceHolderView: UIView {
     fileprivate func setupUI() {
 
         // 占位标题Label
-        let titleLabel = UILabel()
+        let titleLabel = UILabel(attributedText: self.titleAttributedString)
         titleLabel.numberOfLines = 0
-        titleLabel.attributedText = self.titleAttributedString
         self.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         let titleLabelLeading = NSLayoutConstraint(item: titleLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0)
@@ -114,9 +113,8 @@ public class HZPlaceHolderView: UIView {
         var _subtitleLabel: UILabel?
         // 占位副标题Label
         if let _subtitleAttributedString = self.subtitleAttributedString {
-            let subtitleLabel = UILabel()
+            let subtitleLabel = UILabel(attributedText: _subtitleAttributedString)
             subtitleLabel.numberOfLines = 0
-            subtitleLabel.attributedText = _subtitleAttributedString
             self.addSubview(subtitleLabel)
             _subtitleLabel = subtitleLabel
             subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
