@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol HZTableViewPlaceHolderDelegate {
+public protocol HZTableViewPlaceHolderDelegate: AnyObject {
     func makePlaceHolderView() -> UIView?
     func enableScrollWhenPlaceHolderViewShowing() -> Bool
 }
