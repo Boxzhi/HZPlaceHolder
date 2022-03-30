@@ -98,7 +98,7 @@ public class HZTableViewModel: NSObject {
 }
 
 //MARK: - UITableViewDelegate -------------------------------
-public extension HZTableViewModel: UITableViewDelegate {
+extension HZTableViewModel: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let cellModel = self.getCellModelForIndexPath(indexPath: indexPath) {
@@ -348,7 +348,7 @@ public extension HZTableViewModel: UITableViewDelegate {
 }
 
 //MARK: - UITableViewDataSource -------------------------------
-public extension HZTableViewModel: UITableViewDataSource {
+extension HZTableViewModel: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sectionModel = self.getSectionModelForSection(section: section), let count = sectionModel.cellModelArray?.count else {
@@ -437,7 +437,7 @@ public extension HZTableViewModel: UITableViewDataSource {
 }
 
 //MARK: - UIScrollViewDelegate -------------------------------
-public extension HZTableViewModel: UIScrollViewDelegate {
+extension HZTableViewModel: UIScrollViewDelegate {
 
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.scrollViewDidScrollHandler?(scrollView)
@@ -501,7 +501,7 @@ public extension HZTableViewModel: UIScrollViewDelegate {
 }
 
 //MARK: HZTableViewPlaceHolderDelegate -------------------------------
-public extension HZTableViewModel: HZTableViewPlaceHolderDelegate {
+extension HZTableViewModel: HZTableViewPlaceHolderDelegate {
     
     public func makePlaceHolderView() -> UIView? {
         if let _makePlaceHolderViewHandler = self.makePlaceHolderViewHandler {
