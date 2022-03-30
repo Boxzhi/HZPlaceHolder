@@ -33,7 +33,7 @@ public typealias HZScrollViewWillBeginZoomingHandler = (_ scrollView: UIScrollVi
 public typealias HZScrollViewDidEndZoomingHandler = (_ scrollView: UIScrollView, _ view: UIView?, _ scale: CGFloat) -> Void
 public typealias HZScrollViewShouldScrollToTopHandler = (_ scrollView: UIScrollView) -> Bool
 
-class HZTableViewModel: NSObject {
+public class HZTableViewModel: NSObject {
     var sectionModelArray: [HZTableViewSectionModel]?
     var isShowIndex: Bool = false
     var sectionIndexTitles: [String]?
@@ -526,7 +526,7 @@ public typealias HZSectionViewForHeaderHandler = (_ tableView: UITableView, _ se
 public typealias HZSectionHeightForHeaderFooterInSectionHandler = (_ tableView: UITableView, _ section: Int) -> CGFloat
 public typealias HZSectionTitleForHeaderFooterInSectionHandler = (_ tableView: UITableView, _ section: Int) -> String?
 
-class HZTableViewSectionModel: NSObject {
+public class HZTableViewSectionModel: NSObject {
     var cellModelArray: [HZTableViewCellModel]?
     var headerTitle: String?
     var footerTitle: String?
@@ -576,7 +576,7 @@ public typealias HZCellCanFocusRowHandler = (_ tableView: UITableView, _ indexPa
 public typealias HZCellForRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
 public typealias HZCellCanEditMoveRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> Bool
 
-class HZTableViewCellModel: NSObject {
+public class HZTableViewCellModel: NSObject {
     var height: CGFloat = 40.0
     var editingStyle: UITableViewCell.EditingStyle = .none
     var titleForDeleteConfirmationButton: String = "删除"
