@@ -33,9 +33,6 @@ public typealias HZScrollViewWillBeginZoomingHandler = (_ scrollView: UIScrollVi
 public typealias HZScrollViewDidEndZoomingHandler = (_ scrollView: UIScrollView, _ view: UIView?, _ scale: CGFloat) -> Void
 public typealias HZScrollViewShouldScrollToTopHandler = (_ scrollView: UIScrollView) -> Bool
 
-// HZTableViewPlaceHolderDelegate
-public typealias HZMakePlaceHolderViewHandler = () -> UIView?
-
 class HZTableViewModel: NSObject {
     var sectionModelArray: [HZTableViewSectionModel]?
     var isShowIndex: Bool = false
@@ -44,7 +41,7 @@ class HZTableViewModel: NSObject {
     var isShouldScrollToTop: Bool = true
     
     //MARK: HZTableViewPlaceHolderDelegate
-    var makePlaceHolderViewHandler: HZMakePlaceHolderViewHandler?
+    var makePlaceHolderViewHandler: (() -> UIView)?
     var placeHolderView: UIView?
     var isScrollWhenPlaceHolderViewShowing = true
     
@@ -508,7 +505,7 @@ extension HZTableViewModel: HZTableViewPlaceHolderDelegate {
     
     func makePlaceHolderView() -> UIView? {
         if let _makePlaceHolderViewHandler = self.makePlaceHolderViewHandler {
-            return _makePlaceHolderViewHandler
+            return _makePlaceHolderViewHandler()
         }else {
             return self.placeHolderView
         }
