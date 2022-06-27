@@ -522,7 +522,7 @@ extension HZTableViewModel: HZTableViewPlaceHolderDelegate {
 //MARK: ---------------------------- HZTableViewSectionModel ----------------------------
 //MARK: --------------------------------------------------------------------------------------
 public typealias HZSectionDisplayHeaderFooterViewHandler = (_ tableView: UITableView, _ view: UIView, _ section: Int) -> Void
-public typealias HZSectionViewForHeaderHandler = (_ tableView: UITableView, _ section: Int) -> UIView
+public typealias HZSectionViewForHeaderFooterHandler = (_ tableView: UITableView, _ section: Int) -> UIView?
 public typealias HZSectionHeightForHeaderFooterInSectionHandler = (_ tableView: UITableView, _ section: Int) -> CGFloat
 public typealias HZSectionTitleForHeaderFooterInSectionHandler = (_ tableView: UITableView, _ section: Int) -> String?
 
@@ -539,8 +539,8 @@ public class HZTableViewSectionModel: NSObject {
     public var willDisplayFooterViewHandler: HZSectionDisplayHeaderFooterViewHandler?
     public var didEndDisplayingHeaderViewHandler: HZSectionDisplayHeaderFooterViewHandler?
     public var didEndDisplayingFooterViewHandler: HZSectionDisplayHeaderFooterViewHandler?
-    public var viewForHeaderHandler: HZSectionViewForHeaderHandler?
-    public var viewForFooterHandler: HZSectionViewForHeaderHandler?
+    public var viewForHeaderHandler: HZSectionViewForHeaderFooterHandler?
+    public var viewForFooterHandler: HZSectionViewForHeaderFooterHandler?
     public var heightForHeaderInSectionHandler: HZSectionHeightForHeaderFooterInSectionHandler?
     public var heightForFooterInSectionHandler: HZSectionHeightForHeaderFooterInSectionHandler?
     public var titleForHeaderInSectionHandler: HZSectionTitleForHeaderFooterInSectionHandler?
