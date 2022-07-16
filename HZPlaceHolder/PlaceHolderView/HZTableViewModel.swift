@@ -41,7 +41,7 @@ public class HZTableViewModel: NSObject {
     public var isShouldScrollToTop: Bool = true
     
     //MARK: HZTableViewPlaceHolderDelegate
-    public var makePlaceHolderViewHandler: (() -> UIView)?
+    public var makePlaceHolderViewHandler: (() -> UIView?)?
     public var placeHolderView: UIView?
     public var isScrollWhenPlaceHolderViewShowing = true
     
