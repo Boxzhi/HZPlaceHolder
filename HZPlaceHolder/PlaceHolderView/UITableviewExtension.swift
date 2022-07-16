@@ -103,9 +103,10 @@ extension UITableView {
                 self.isScrollEnabled = _scrollWasEnabled
             }
             if let _placeHolderView = self.placeHolderDelegate?.makePlaceHolderView() {
-                _placeHolderView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
+//                _placeHolderView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
                 self.placeHolderView = _placeHolderView
                 self.addSubview(_placeHolderView)
+                addPlaceHolderViewConstraints(_placeHolderView)
             }
         }else if self.placeHolderView != nil {
             self.placeHolderView?.removeFromSuperview()
@@ -114,9 +115,10 @@ extension UITableView {
                     self.isScrollEnabled = _scrollWasEnabled
                 }
                 if let _placeHolderView = self.placeHolderDelegate?.makePlaceHolderView() {
-                    _placeHolderView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
+//                    _placeHolderView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
                     self.placeHolderView = _placeHolderView
                     self.addSubview(_placeHolderView)
+                    addPlaceHolderViewConstraints(_placeHolderView)
                 }
             }else {
                 self.isScrollEnabled = true
@@ -124,5 +126,15 @@ extension UITableView {
             }
         }
     }
+    
+    fileprivate func addPlaceHolderViewConstraints(_ phView: UIView) {
+        phView.translatesAutoresizingMaskIntoConstraints = false
+        let placeHolderViewCenterX = NSLayoutConstraint(item: phView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
+        let placeHolderViewCenterY = NSLayoutConstraint(item: phView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
+        let placeHolderViewWidth = NSLayoutConstraint(item: phView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1.0, constant: 0)
+        let placeHolderViewHeight = NSLayoutConstraint(item: phView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: 0)
+        addConstraints([placeHolderViewCenterX, placeHolderViewCenterY, placeHolderViewWidth, placeHolderViewHeight])
+    }
+    
 }
 
