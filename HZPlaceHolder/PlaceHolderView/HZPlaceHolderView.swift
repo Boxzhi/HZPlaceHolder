@@ -21,7 +21,7 @@ public class HZPlaceHolderView: UIView {
     fileprivate var image: UIImage? // 占位图
     fileprivate var ibSpace: CGFloat = 0 // 占位图距标题间距
     fileprivate var titleAttributedString: NSAttributedString? // 标题
-    fileprivate var titleCenterYOffset: CGFloat = 0 // 标题居中偏移量
+    fileprivate var titleCenterYConstant: CGFloat = 1.0 // 标题居中偏移量
     fileprivate var beforeButton: UIButton? // 前按钮
     fileprivate var btSpace: CGFloat = 0 // 前按钮距标题(副标题)间距
     fileprivate var clickBeforeButtonHandler: HZPlaceHolderViewClickButtonHandler? // 前按钮点击事件回调
@@ -32,27 +32,7 @@ public class HZPlaceHolderView: UIView {
     fileprivate var buttonLayoutType: HZButtonLayoutType = .leftRight // 俩按钮布局样式
     fileprivate var clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? // 背景点击事件回调
     
-    /// 创建空态页HZPlaceHolderView
-    /// - Parameters:
-    ///   - image: 占位图
-    ///   - ibSpace: 占位图底部距标题顶部间距
-    ///   - titleAttributedString: 标题富文本
-    ///   - titleCenterYOffset: 标题水平居中偏移量
-    ///   - beforeButton: 前按钮
-    ///   - btSpace: 前按钮顶部距标题(副标题)底部间距
-    ///   - clickBeforeButtonHandler: 前按钮点击事件回调
-    ///   - afterButton: 后按钮
-    ///   - clickAfterButtonHandler: 后按钮点击事件回调
-    ///   - buttonSize: 按钮宽高
-    ///   - buttonSpace: 俩按钮间距
-    ///   - buttonLayoutType: 俩按钮布局样式
-    ///   - backgroundColor: 背景色
-    ///   - clickBackgroundHandler: 背景点击事件回调
-    public class func create(image: Any? = nil, ibSpace: CGFloat = 15.0, titleAttributedString: NSAttributedString, titleCenterYOffset: CGFloat = 0, beforeButton: UIButton? = nil, btSpace: CGFloat = 35.0, clickBeforeButtonHandler: HZPlaceHolderViewClickButtonHandler? = nil, afterButton: UIButton? = nil, clickAfterButtonHandler: HZPlaceHolderViewClickButtonHandler? = nil, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), buttonSpace: CGFloat = 25.0, buttonLayoutType: HZButtonLayoutType = .leftRight, backgroundColor: UIColor = .white, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? = nil) -> HZPlaceHolderView {
-        return HZPlaceHolderView(image, ibSpace: ibSpace, titleAttributedString: titleAttributedString, titleCenterYOffset: titleCenterYOffset, beforeButton: beforeButton, btSpace: btSpace, clickBeforeButtonHandler: clickBeforeButtonHandler, afterButton: afterButton, clickAfterButtonHandler: clickAfterButtonHandler, buttonSize: buttonSize, buttonSpace: buttonSpace, buttonLayoutType: buttonLayoutType, backgroundColor: backgroundColor, clickBackgroundHandler: clickBackgroundHandler)
-    }
-    
-    fileprivate init(_ image: Any?, ibSpace: CGFloat, titleAttributedString: NSAttributedString, titleCenterYOffset: CGFloat, beforeButton: UIButton?, btSpace: CGFloat, clickBeforeButtonHandler: HZPlaceHolderViewClickButtonHandler?, afterButton: UIButton?, clickAfterButtonHandler: HZPlaceHolderViewClickButtonHandler?, buttonSize: CGSize, buttonSpace: CGFloat, buttonLayoutType: HZButtonLayoutType, backgroundColor: UIColor, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler?) {
+    fileprivate init(_ image: Any?, ibSpace: CGFloat, titleAttributedString: NSAttributedString, titleCenterYConstant: CGFloat, beforeButton: UIButton?, btSpace: CGFloat, clickBeforeButtonHandler: HZPlaceHolderViewClickButtonHandler?, afterButton: UIButton?, clickAfterButtonHandler: HZPlaceHolderViewClickButtonHandler?, buttonSize: CGSize, buttonSpace: CGFloat, buttonLayoutType: HZButtonLayoutType, backgroundColor: UIColor, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler?) {
         super.init(frame: .zero)
         
         if let _imageString = image as? String {
@@ -62,7 +42,7 @@ public class HZPlaceHolderView: UIView {
         }
         self.ibSpace = ibSpace
         self.titleAttributedString = titleAttributedString
-        self.titleCenterYOffset = titleCenterYOffset
+        self.titleCenterYConstant = titleCenterYConstant
         self.beforeButton = beforeButton
         self.btSpace = btSpace
         self.clickBeforeButtonHandler = clickBeforeButtonHandler
@@ -88,7 +68,7 @@ public class HZPlaceHolderView: UIView {
         self.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         let titleLabelCenterX = NSLayoutConstraint(item: titleLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
-        let titleLabelCenterY = NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: titleCenterYOffset)
+        let titleLabelCenterY = NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
         addConstraints([titleLabelCenterX, titleLabelCenterY])
         
         // 占位ImageView
@@ -160,6 +140,42 @@ extension HZPlaceHolderView {
     
     @objc fileprivate func clickAfterButtonAction(_ sender: UIButton) {
         clickAfterButtonHandler?(sender, self)
+    }
+    
+}
+
+extension HZPlaceHolderView {
+    
+    /// 创建空态页HZPlaceHolderView
+    /// - Parameters:
+    ///   - image: 占位图
+    ///   - ibSpace: 占位图底部距标题顶部间距
+    ///   - titleAttributedString: 标题富文本
+    ///   - titleCenterYConstant: 标题水平居中偏移量
+    ///   - beforeButton: 前按钮
+    ///   - btSpace: 前按钮顶部距标题(副标题)底部间距
+    ///   - clickBeforeButtonHandler: 前按钮点击事件回调
+    ///   - afterButton: 后按钮
+    ///   - clickAfterButtonHandler: 后按钮点击事件回调
+    ///   - buttonSize: 按钮宽高
+    ///   - buttonSpace: 俩按钮间距
+    ///   - buttonLayoutType: 俩按钮布局样式
+    ///   - backgroundColor: 背景色
+    ///   - clickBackgroundHandler: 背景点击事件回调
+    public class func create(image: Any? = nil, ibSpace: CGFloat = 15.0, titleAttributedString: NSAttributedString, titleCenterYConstant: CGFloat = 1.0, beforeButton: UIButton? = nil, btSpace: CGFloat = 35.0, clickBeforeButtonHandler: HZPlaceHolderViewClickButtonHandler? = nil, afterButton: UIButton? = nil, clickAfterButtonHandler: HZPlaceHolderViewClickButtonHandler? = nil, buttonSize: CGSize = CGSize(width: 120.0, height: 44.0), buttonSpace: CGFloat = 25.0, buttonLayoutType: HZButtonLayoutType = .leftRight, backgroundColor: UIColor = .white, clickBackgroundHandler: HZPlaceHolderViewClickBackgroundHandler? = nil) -> HZPlaceHolderView {
+        return HZPlaceHolderView(image, ibSpace: ibSpace, titleAttributedString: titleAttributedString, titleCenterYConstant: titleCenterYConstant, beforeButton: beforeButton, btSpace: btSpace, clickBeforeButtonHandler: clickBeforeButtonHandler, afterButton: afterButton, clickAfterButtonHandler: clickAfterButtonHandler, buttonSize: buttonSize, buttonSpace: buttonSpace, buttonLayoutType: buttonLayoutType, backgroundColor: backgroundColor, clickBackgroundHandler: clickBackgroundHandler)
+    }
+    
+    /// 更新约束
+    /// - Parameter multiplier: label的水平居中比
+    public func updateTitleLabelCenterYConstraint(_ constant: CGFloat) {
+        self.titleCenterYConstant = constant
+        self.constraints.forEach { layoutConstraint in
+            if layoutConstraint.firstItem is UILabel, layoutConstraint.firstAttribute == .centerY {
+                layoutConstraint.constant = constant
+            }
+        }
+        self.updateConstraintsIfNeeded()
     }
     
 }
