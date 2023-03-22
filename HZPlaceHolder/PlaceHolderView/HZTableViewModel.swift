@@ -104,10 +104,6 @@ extension HZTableViewModel: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cellModel = self.getCellModelForIndexPath(indexPath: indexPath) else { return }
         cellModel.willDisplayCellHandler?(tableView, cell, indexPath)
-        if let cellHiddenForRowHandler = cellModel.cellHiddenForRowHandler, cellHiddenForRowHandler(tableView, indexPath) {
-        }else {
-            self.heightAtIndexPathDictionary[indexPath] = cell.frame.size.height
-        }
     }
     
     public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -141,20 +137,18 @@ extension HZTableViewModel: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let cellModel = self.getCellModelForIndexPath(indexPath: indexPath) else {
-            return 0
-        }
-        if let cellHiddenForRowHandler = cellModel.cellHiddenForRowHandler, cellHiddenForRowHandler(tableView, indexPath) {
-            return 0
+        guard let cellModel = self.getCellModelForIndexPath(indexPath: indexPath) else { return 40.0 }
+        if let _heightForRowHandler = cellModel.heightForRowHandler, let _height = _heightForRowHandler(tableView, indexPath) {
+            cellModel.height = _height
+            return _height
+        }else if let _tableViewEstimatedHeight = self.estimatedHeightForRowHandler {
+            tableView.estimatedRowHeight = _tableViewEstimatedHeight(tableView, indexPath)
+            return UITableView.automaticDimension
+        }else if let _cellEstimatedHeight = cellModel.estimatedHeightForRowHandler {
+            tableView.estimatedRowHeight = _cellEstimatedHeight(tableView, indexPath)
+            return UITableView.automaticDimension
         }else {
-            if let _ = cellModel.estimatedHeightForRowHandler {
-                return UITableView.automaticDimension
-            }else {
-                if let heightForRowHandler = cellModel.heightForRowHandler {
-                    cellModel.height = heightForRowHandler(tableView, indexPath)
-                }
-                return cellModel.height
-            }
+            return cellModel.height
         }
     }
     
@@ -178,27 +172,18 @@ extension HZTableViewModel: UITableViewDelegate {
         return sectionModel.footerHeight
     }
 
-    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let cellModel = self.getCellModelForIndexPath(indexPath: indexPath) else {
-            return 0
-        }
-        if let cellHiddenForRowHandler = cellModel.cellHiddenForRowHandler, cellHiddenForRowHandler(tableView, indexPath) {
-            return 0
-        }else {
-            if let estimatedHeightForRowHandler = cellModel.estimatedHeightForRowHandler {
-                if let _height = self.heightAtIndexPathDictionary[indexPath] {
-                    return _height
-                }else {
-                    return estimatedHeightForRowHandler(tableView, indexPath)
-                }
-            }else {
-                if let heightForRowHandler = cellModel.heightForRowHandler {
-                    cellModel.height = heightForRowHandler(tableView, indexPath)
-                }
-                return cellModel.height
-            }
-        }
-    }
+//    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        guard let cellModel = self.getCellModelForIndexPath(indexPath: indexPath) else { return 40.0 }
+//        if let _estimatedHeightForRowHandler = cellModel.estimatedHeightForRowHandler {
+//            return _estimatedHeightForRowHandler(tableView, indexPath)
+//        }else {
+//            if let _heightForRowHandler = cellModel.heightForRowHandler {
+//                return _heightForRowHandler(tableView, indexPath)
+//            }else {
+//                return cellModel.height
+//            }
+//        }
+//    }
 //
 //    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat
 //
@@ -592,7 +577,8 @@ public class HZTableViewSectionModel: NSObject {
 //MARK: --------------------------------------------------------------------------------------
 // UITableViewDelegate
 public typealias HZCellDisplayCellHandler = (_ tableView: UITableView, _ cell: UITableViewCell, _ indexPath: IndexPath) -> Void
-public typealias HZCellHeightForRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> CGFloat
+public typealias HZCellHeightForRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> CGFloat?
+public typealias HZCellEstimatedHeightForRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> CGFloat
 public typealias HZTableViewDidHighlightRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> Void
 public typealias HZCellWillSelectDeselectRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> IndexPath?
 public typealias HZCellDidSelectDeselectRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> Void
@@ -603,7 +589,6 @@ public typealias HZCellShouldIndentWhileEditingRowHandler = (_ tableView: UITabl
 public typealias HZCellEditingRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath?) -> Void
 public typealias HZCellShouldShowMenuForRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath?) -> Bool
 public typealias HZCellCanFocusRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath?) -> Bool
-public typealias HZCellHiddenForRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> Bool
 
 // UITableViewDataSource
 public typealias HZCellForRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
@@ -623,8 +608,7 @@ public class HZTableViewCellModel: NSObject {
     public var willDisplayCellHandler: HZCellDisplayCellHandler?
     public var didEndDisplayingCellHandler: HZCellDisplayCellHandler?
     public var heightForRowHandler: HZCellHeightForRowHandler?
-    public var estimatedHeightForRowHandler: HZCellHeightForRowHandler?
-    public var cellHiddenForRowHandler: HZCellHiddenForRowHandler?
+    public var estimatedHeightForRowHandler: HZCellEstimatedHeightForRowHandler?
     public var didHighlightRowHandler: HZTableViewDidHighlightRowHandler?
     public var didUnhighlightRowHandler: HZTableViewDidHighlightRowHandler?
     public var willSelectRowHandler: HZCellWillSelectDeselectRowHandler?
