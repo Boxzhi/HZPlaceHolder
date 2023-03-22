@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint HZNavigationBar.podspec' to ensure this is a
+#  Be sure to run `pod spec lint HZPlaceHolder.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see https://docs.cocoapods.org/specification.html
@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
   s.framework = 'UIKit'
   s.requires_arc = true
   s.swift_version = '5.0'
+  s.static_framework = true
 
   # s.default_subspec = 'PlaceHolderView'
 
