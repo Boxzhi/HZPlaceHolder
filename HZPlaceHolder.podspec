@@ -31,8 +31,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Refresh' do |refresh|
     refresh.source_files = 'HZPlaceHolder/Refresh/*.swift'
-    refresh.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
-    refresh.dependency 'MJRefresh'
+    refresh.dependency 'MJRefresh' :modular_headers => true
   end
 
 end
