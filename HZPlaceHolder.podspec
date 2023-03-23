@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Refresh' do |refresh|
     refresh.source_files = 'HZPlaceHolder/Refresh/*.swift'
-    refresh.dependency 'MJRefresh' :modular_headers => true
+    refresh.dependency 'MJRefresh'
   end
 
 end
