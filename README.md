@@ -1,7 +1,7 @@
 ![](https://raw.githubusercontent.com/Boxzhi/HZPlaceHolder/master/Images/logo.png)
 
 
-[![Version](https://img.shields.io/badge/pod-1.2.2-blue.svg)](https://github.com/Boxzhi/HZPlaceHolder) [![Build Status](https://img.shields.io/badge/build-passing-green.svg)]()
+[![Version](https://img.shields.io/badge/pod-1.2.3-blue.svg)](https://github.com/Boxzhi/HZPlaceHolder) [![Build Status](https://img.shields.io/badge/build-passing-green.svg)]()
 ![](https://img.shields.io/badge/swift-4.2%2B-orange.svg)
 ![](https://img.shields.io/badge/platform-iOS%2010.0%2B-yellowgreen.svg) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Boxzhi/HZPlaceHolder/blob/master/LICENSE)
 
