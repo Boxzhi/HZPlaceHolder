@@ -544,6 +544,9 @@ public typealias HZSectionHeightForHeaderFooterInSectionHandler = (_ tableView: 
 public typealias HZSectionTitleForHeaderFooterInSectionHandler = (_ tableView: UITableView, _ section: Int) -> String?
 
 public class HZTableViewSectionModel: NSObject {
+    
+    public var flagProperties: Any?
+    
     public var cellModelArray: [HZTableViewCellModel]?
     public var headerTitle: String?
     public var footerTitle: String?
@@ -595,6 +598,9 @@ public typealias HZCellForRowHandler = (_ tableView: UITableView, _ indexPath: I
 public typealias HZCellCanEditMoveRowHandler = (_ tableView: UITableView, _ indexPath: IndexPath) -> Bool
 
 public class HZTableViewCellModel: NSObject {
+    
+    public var flagProperties: Any?
+    
     public var height: CGFloat = 40.0
     public var editingStyle: UITableViewCell.EditingStyle = .none
     public var titleForDeleteConfirmationButton: String = "删除"
