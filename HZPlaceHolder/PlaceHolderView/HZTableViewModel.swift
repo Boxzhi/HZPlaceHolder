@@ -568,8 +568,8 @@ public class HZTableViewSectionModel: NSObject {
     
     public override init() {
         super.init()
-        self.headerHeight = UITableView.automaticDimension
-        self.footerHeight = UITableView.automaticDimension
+//        self.headerHeight = UITableView.automaticDimension
+//        self.footerHeight = UITableView.automaticDimension
         self.cellModelArray = []
     }
 }
