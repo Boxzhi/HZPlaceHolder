@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name = 'HZPlaceHolder'
-  s.version = '1.2.3'
+  s.version = '1.2.4'
   s.license = 'MIT'
   s.summary = 'Quickly create a null data placeholder view'
   s.homepage = 'https://github.com/Boxzhi/HZPlaceHolder'
