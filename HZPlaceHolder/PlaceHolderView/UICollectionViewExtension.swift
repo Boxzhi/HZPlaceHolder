@@ -81,9 +81,10 @@ extension UICollectionView {
                 self.isScrollEnabled = _scrollWasEnabled
             }
             if let _placeHolderView = self.placeHolderDelegate?.makePlaceHolderView() {
-                _placeHolderView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
+//                _placeHolderView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
                 self.placeHolderView = _placeHolderView
                 self.addSubview(_placeHolderView)
+                addPlaceHolderViewConstraints(_placeHolderView)
             }
         }else if self.placeHolderView != nil {
             self.placeHolderView?.removeFromSuperview()
@@ -92,9 +93,10 @@ extension UICollectionView {
                     self.isScrollEnabled = _scrollWasEnabled
                 }
                 if let _placeHolderView = self.placeHolderDelegate?.makePlaceHolderView() {
-                    _placeHolderView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
+//                    _placeHolderView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
                     self.placeHolderView = _placeHolderView
                     self.addSubview(_placeHolderView)
+                    addPlaceHolderViewConstraints(_placeHolderView)
                 }
             }else {
                 self.isScrollEnabled = true

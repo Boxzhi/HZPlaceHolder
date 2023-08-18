@@ -1,6 +1,6 @@
 PODS:
-  - HZPlaceHolder/PlaceHolderView (1.0.7)
-  - HZPlaceHolder/Refresh (1.0.7):
+  - HZPlaceHolder/PlaceHolderView (1.2.4)
+  - HZPlaceHolder/Refresh (1.2.4):
     - MJRefresh
   - MJRefresh (3.2.2)
 
@@ -18,9 +18,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HZPlaceHolder: 7e73bfc99853cfd720f18aba33ae78b6a546eb4e
+  HZPlaceHolder: 6ee0bfd7a95449a7e1a899f398a84630422d8881
   MJRefresh: 72a46ecaa2a0feaf48fc5198dff95f25f8bb27c6
 
 PODFILE CHECKSUM: c90b5d5c30cdf0d7bc39ad681ef9cc45fd12a4ac
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.12.0
