@@ -33,9 +33,25 @@ public typealias HZScrollViewWillBeginZoomingHandler = (_ scrollView: UIScrollVi
 public typealias HZScrollViewDidEndZoomingHandler = (_ scrollView: UIScrollView, _ view: UIView?, _ scale: CGFloat) -> Void
 public typealias HZScrollViewShouldScrollToTopHandler = (_ scrollView: UIScrollView) -> Bool
 
+@objc public protocol HZTableViewModelDelegate : NSObjectProtocol {
+    
+    var sectionModels: [HZTableViewSectionModel]? { get }
+    
+    @objc optional func getTableViewSectionModel(_ arg: Any?) -> HZTableViewSectionModel
+    
+    @objc optional func getTableViewCellModel(_ arg: Any?) -> HZTableViewCellModel
+    
+}
+
 public class HZTableViewModel: NSObject {
+    
+    private weak var delegate: HZTableViewModelDelegate?
+    private weak var tableView: UITableView?
     public lazy var heightAtIndexPathDictionary: [IndexPath: CGFloat] = [:]
-    public var sectionModelArray: [HZTableViewSectionModel]?
+    public lazy var sectionModelArray: [HZTableViewSectionModel] = {
+        let _sectionModelArray: [HZTableViewSectionModel] = []
+        return _sectionModelArray
+    }()
     public var isShowIndex: Bool = false
     public var sectionIndexTitles: [String]?
     public var isShouldUpdateFocusIn: Bool = false
@@ -76,24 +92,34 @@ public class HZTableViewModel: NSObject {
     public var scrollViewDidScrollToTopHandler: HZScrollViewHandler?
     public var scrollViewDidChangeAdjustedContentInsetHandler: HZScrollViewHandler?
     
-    //MARK: 初始化
-    public override init() {
-        super.init()
-        self.sectionModelArray = []
+    public func setModelDelegate(_ tableView: UITableView, delegate: HZTableViewModelDelegate) {
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.tableView = tableView
+        self.delegate = delegate
     }
     
-    fileprivate func getSectionModelForSection(section: Int) -> HZTableViewSectionModel? {
-        guard let _sectionModelArray = self.sectionModelArray, _sectionModelArray.count > section else {
-            return nil
+    public func reload() {
+        sectionModelArray.removeAll()
+        if let sectionModels = delegate?.sectionModels {
+            sectionModelArray = sectionModels
         }
-        return _sectionModelArray[section]
+        tableView?.hz.reload()
+    }
+    
+    //MARK: 初始化
+    fileprivate func getSectionModelForSection(section: Int) -> HZTableViewSectionModel? {
+        guard sectionModelArray.count > section else { return nil }
+        return sectionModelArray[section]
     }
     
     fileprivate func getCellModelForIndexPath(indexPath: IndexPath?) -> HZTableViewCellModel? {
-        guard let _indexPath = indexPath, let _sectionModelArray = self.sectionModelArray, _sectionModelArray.count > _indexPath.section, let _cellModelArray = _sectionModelArray[_indexPath.section].cellModelArray, _cellModelArray.count > _indexPath.row else {
+        guard let indexPath else { return nil }
+        if let sectionModel = getSectionModelForSection(section: indexPath.section), indexPath.row < sectionModel.cellModelArray.count {
+            return sectionModel.cellModelArray[indexPath.row]
+        }else {
             return nil
         }
-        return _cellModelArray[_indexPath.row]
     }
     
 }
@@ -102,8 +128,9 @@ public class HZTableViewModel: NSObject {
 extension HZTableViewModel: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cellModel = self.getCellModelForIndexPath(indexPath: indexPath) else { return }
-        cellModel.willDisplayCellHandler?(tableView, cell, indexPath)
+        if let cellModel = self.getCellModelForIndexPath(indexPath: indexPath) {
+            cellModel.willDisplayCellHandler?(tableView, cell, indexPath)
+        }
     }
     
     public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -368,10 +395,10 @@ extension HZTableViewModel: UITableViewDelegate {
 extension HZTableViewModel: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionModel = self.getSectionModelForSection(section: section), let count = sectionModel.cellModelArray?.count else {
+        guard let sectionModel = self.getSectionModelForSection(section: section) else {
             return 0
         }
-        return count
+        return sectionModel.cellModelArray.count
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -382,10 +409,7 @@ extension HZTableViewModel: UITableViewDataSource {
     }
 
     public func numberOfSections(in tableView: UITableView) -> Int {
-        guard let count = self.sectionModelArray?.count else {
-            return 0
-        }
-        return count
+        return sectionModelArray.count
     }
 
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -487,7 +511,7 @@ extension HZTableViewModel: UIScrollViewDelegate {
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         self.scrollViewDidEndScrollingAnimationHandler?(scrollView)
     }
-
+    
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         self.viewForZoomingHandler?(scrollView)
     }
@@ -547,7 +571,10 @@ public class HZTableViewSectionModel: NSObject {
     
     public var flagProperties: Any?
     
-    public var cellModelArray: [HZTableViewCellModel]?
+    public lazy var cellModelArray: [HZTableViewCellModel] = {
+        let cellModelArray: [HZTableViewCellModel] = []
+        return cellModelArray
+    }()
     public var headerTitle: String?
     public var footerTitle: String?
     public var headerHeight: CGFloat = 0.01
@@ -566,12 +593,6 @@ public class HZTableViewSectionModel: NSObject {
     public var titleForHeaderInSectionHandler: HZSectionTitleForHeaderFooterInSectionHandler?
     public var titleForFooterInSectionHandler: HZSectionTitleForHeaderFooterInSectionHandler?
     
-    public override init() {
-        super.init()
-//        self.headerHeight = UITableView.automaticDimension
-//        self.footerHeight = UITableView.automaticDimension
-        self.cellModelArray = []
-    }
 }
 
 

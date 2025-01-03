@@ -8,6 +8,33 @@
 
 import UIKit
 
+public struct UITableViewWrapper<Base> {
+    public let base: Base
+    public init(_ base: Base) {
+        self.base = base
+    }
+}
+
+public protocol UITableViewCompatible: AnyObject { }
+
+extension UITableViewCompatible {
+
+    public var hz: UITableViewWrapper<Self> {
+        get { return UITableViewWrapper(self) }
+    }
+    
+}
+
+extension UITableView: UITableViewCompatible {}
+
+public extension UITableViewWrapper where Base: UITableView {
+    
+    func reload() {
+        base.hz_reloadData()
+    }
+    
+}
+
 public protocol HZTableViewPlaceHolderDelegate: AnyObject {
     func makePlaceHolderView() -> UIView?
     func enableScrollWhenPlaceHolderViewShowing() -> Bool

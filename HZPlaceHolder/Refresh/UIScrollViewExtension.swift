@@ -22,7 +22,6 @@ public protocol RefreshCompatible: AnyObject { }
 extension RefreshCompatible {
     public var hz: RefreshWrapper<Self> {
         get { return RefreshWrapper(self) }
-        set { }
     }
 }
 
