@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name = 'HZPlaceHolder'
-  s.version = '1.2.5'
+  s.version = '1.2.6'
   s.license = 'MIT'
   s.summary = 'Quickly create a null data placeholder view'
   s.homepage = 'https://github.com/Boxzhi/HZPlaceHolder'
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://www.jianshu.com/u/9767e7dda727'
   s.source = { :git => "https://github.com/Boxzhi/HZPlaceHolder.git", :tag => s.version }
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
   s.framework = 'UIKit'
   s.requires_arc = true
   s.swift_version = '5.0'
