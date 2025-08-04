@@ -81,22 +81,6 @@ extension UITableView {
         // 是否要显示空数据视图
         var isEmpty = true
         
-//        let src: UITableViewDataSource? = self.dataSource
-//        var sections: Int = 1
-//        if let _newSection = src?.numberOfSections?(in: self) {
-//            sections = _newSection
-//        }
-//        if let _src = src, self.placeHolderDelegate == nil  {
-//            self.placeHolderDelegate = _src as? HZTableViewPlaceHolderDelegate
-//        }
-//        for i in 0 ..< sections {
-//            let rows = src?.tableView(self, numberOfRowsInSection: i)
-//            if let _rows = rows, _rows > 0 {
-//                isEmpty = false
-//                break
-//            }
-//        }
-        
         let src: UITableViewDataSource? = self.dataSource
         let delegate: UITableViewDelegate? = self.delegate
         
