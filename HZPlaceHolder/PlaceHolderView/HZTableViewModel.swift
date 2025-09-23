@@ -48,10 +48,7 @@ public class HZTableViewModel: NSObject {
     private weak var delegate: HZTableViewModelDelegate?
     private weak var tableView: UITableView?
     public lazy var heightAtIndexPathDictionary: [IndexPath: CGFloat] = [:]
-    public lazy var sectionModelArray: [HZTableViewSectionModel] = {
-        let _sectionModelArray: [HZTableViewSectionModel] = []
-        return _sectionModelArray
-    }()
+    public lazy var sectionModelArray: [HZTableViewSectionModel] = []
     public var isShowIndex: Bool = false
     public var sectionIndexTitles: [String]?
     public var isShouldUpdateFocusIn: Bool = false
@@ -100,22 +97,27 @@ public class HZTableViewModel: NSObject {
     }
     
     public func reload() {
+        guard let delegate else { return }
         sectionModelArray.removeAll()
-        if let sectionModels = delegate?.sectionModels {
+        if let sectionModels = delegate.sectionModels {
             sectionModelArray = sectionModels
         }
         tableView?.hz.reload()
     }
     
     //MARK: 初始化
-    fileprivate func getSectionModelForSection(_ tableView: UITableView, section: Int) -> HZTableViewSectionModel? {
-        guard section < tableView.numberOfSections, section < sectionModelArray.count else { return nil }
-        return sectionModelArray[section]
+    fileprivate func sectionModelForSection(_ tableView: UITableView, section: Int) -> HZTableViewSectionModel? {
+        let sectionsSnapshot = sectionModelArray
+        guard section >= 0 && section < sectionsSnapshot.count else { return nil }
+        return sectionsSnapshot[section]
     }
     
-    fileprivate func getCellModelForIndexPath(_ tableView: UITableView, indexPath: IndexPath?) -> HZTableViewCellModel? {
-        guard let indexPath, let sectionModel = getSectionModelForSection(tableView, section: indexPath.section), indexPath.row < tableView.numberOfRows(inSection: indexPath.section), indexPath.row < sectionModel.cellModelArray.count else { return nil }
-        return sectionModel.cellModelArray[indexPath.row]
+    fileprivate func cellModelForIndexPath(_ tableView: UITableView, indexPath: IndexPath?) -> HZTableViewCellModel? {
+        guard let indexPath else { return nil }
+        guard let sectionModel = sectionModelForSection(tableView, section: indexPath.section) else { return nil }
+        let cellModelsSnapshot = sectionModel.cellModelArray
+        guard indexPath.row >= 0 && indexPath.row < cellModelsSnapshot.count else { return nil }
+        return cellModelsSnapshot[indexPath.row]
     }
     
 }
@@ -124,79 +126,67 @@ public class HZTableViewModel: NSObject {
 extension HZTableViewModel: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath) {
+        if let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath) {
             cellModel.willDisplayCellHandler?(tableView, cell, indexPath)
         }
     }
     
     public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let sectionModel = self.getSectionModelForSection(tableView, section: section) {
+        if let sectionModel = self.sectionModelForSection(tableView, section: section) {
             sectionModel.willDisplayHeaderViewHandler?(tableView, view, section)
         }
     }
     
     public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        if let sectionModel = self.getSectionModelForSection(tableView, section: section) {
+        if let sectionModel = self.sectionModelForSection(tableView, section: section) {
             sectionModel.willDisplayFooterViewHandler?(tableView, view, section)
         }
     }
     
     public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath) {
+        if let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath) {
             cellModel.didEndDisplayingCellHandler?(tableView, cell, indexPath)
         }
     }
     
     public func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        if let sectionModel = self.getSectionModelForSection(tableView, section: section) {
+        if let sectionModel = self.sectionModelForSection(tableView, section: section) {
             sectionModel.didEndDisplayingHeaderViewHandler?(tableView, view, section)
         }
     }
     
     public func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        if let sectionModel = self.getSectionModelForSection(tableView, section: section) {
+        if let sectionModel = self.sectionModelForSection(tableView, section: section) {
             sectionModel.didEndDisplayingFooterViewHandler?(tableView, view, section)
         }
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath) else { return 40.0 }
-        if let heightForRowHandler = cellModel.heightForRowHandler, let height = heightForRowHandler(tableView, indexPath) {
-            cellModel.height = height
+        guard let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath) else { return 40.0 }
+        if let height = cellModel.heightForRowHandler?(tableView, indexPath) {
             return height
-        }else if let tableViewEstimatedHeight = self.estimatedHeightForRowHandler {
-            tableView.estimatedRowHeight = tableViewEstimatedHeight(tableView, indexPath)
-            return UITableView.automaticDimension
-        }else if let cellEstimatedHeight = cellModel.estimatedHeightForRowHandler {
-            tableView.estimatedRowHeight = cellEstimatedHeight(tableView, indexPath)
-            return UITableView.automaticDimension
-        }else {
-            return cellModel.height
         }
+        if let estimated = estimatedHeightForRowHandler?(tableView, indexPath) ?? cellModel.estimatedHeightForRowHandler?(tableView, indexPath) {
+            tableView.estimatedRowHeight = estimated
+            return UITableView.automaticDimension
+        }
+        return cellModel.height
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard let sectionModel = self.getSectionModelForSection(tableView, section: section) else {
-            return 0.01
-        }
-        if let heightForHeaderInSectionHandler = sectionModel.heightForHeaderInSectionHandler {
-            sectionModel.headerHeight = heightForHeaderInSectionHandler(tableView, section)
-        }
+        guard let sectionModel = sectionModelForSection(tableView, section: section) else { return 0.01 }
+        sectionModel.headerHeight = sectionModel.heightForHeaderInSectionHandler?(tableView, section) ?? sectionModel.headerHeight
         return sectionModel.headerHeight
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        guard let sectionModel = self.getSectionModelForSection(tableView, section: section) else {
-            return 0.01
-        }
-        if let heightForFooterInSectionHandler = sectionModel.heightForFooterInSectionHandler {
-            sectionModel.footerHeight = heightForFooterInSectionHandler(tableView, section)
-        }
+        guard let sectionModel = sectionModelForSection(tableView, section: section) else { return 0.01 }
+        sectionModel.footerHeight = sectionModel.heightForFooterInSectionHandler?(tableView, section) ?? sectionModel.footerHeight
         return sectionModel.footerHeight
     }
 
 //    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        guard let cellModel = self.getCellModelForIndexPath(indexPath: indexPath) else { return 40.0 }
+//        guard let cellModel = self.cellModelForIndexPath(indexPath: indexPath) else { return 40.0 }
 //        if let _estimatedHeightForRowHandler = cellModel.estimatedHeightForRowHandler {
 //            return _estimatedHeightForRowHandler(tableView, indexPath)
 //        }else {
@@ -213,7 +203,7 @@ extension HZTableViewModel: UITableViewDelegate {
 //    public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat
 
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionModel = self.getSectionModelForSection(tableView, section: section)
+        let sectionModel = self.sectionModelForSection(tableView, section: section)
         if let viewForHeaderHandler = sectionModel?.viewForHeaderHandler {
             sectionModel?.headerView = viewForHeaderHandler(tableView, section)
         }
@@ -221,7 +211,7 @@ extension HZTableViewModel: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let sectionModel = self.getSectionModelForSection(tableView, section: section)
+        let sectionModel = self.sectionModelForSection(tableView, section: section)
         if let viewForFooterHandler = sectionModel?.viewForFooterHandler {
             sectionModel?.footerView = viewForFooterHandler(tableView, section)
         }
@@ -233,43 +223,43 @@ extension HZTableViewModel: UITableViewDelegate {
 //    public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool
 
     public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath), let didHighlightRowHandler = cellModel.didHighlightRowHandler {
-            return didHighlightRowHandler(tableView, indexPath)
+        if let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let didHighlightRowHandler = cellModel.didHighlightRowHandler {
+            didHighlightRowHandler(tableView, indexPath)
         }
     }
 
     public func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath), let didUnhighlightRowHandler = cellModel.didUnhighlightRowHandler {
-            return didUnhighlightRowHandler(tableView, indexPath)
+        if let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let didUnhighlightRowHandler = cellModel.didUnhighlightRowHandler {
+            didUnhighlightRowHandler(tableView, indexPath)
         }
     }
 
     public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        guard let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath), let handler = cellModel.willSelectRowHandler else {
+        guard let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let handler = cellModel.willSelectRowHandler else {
             return indexPath
         }
         return handler(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
-        guard let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath), let handler = cellModel.willDeselectRowHandler else {
+        guard let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let handler = cellModel.willDeselectRowHandler else {
             return indexPath
         }
         return handler(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         cellModel?.didSelectRowHandler?(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         cellModel?.didDeselectRowHandler?(tableView, indexPath)
     }
     
     public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         guard let editingStyleForRowHandler = cellModel?.editingStyleForRowHandler else {
             return cellModel?.editingStyle ?? .none
         }
@@ -277,7 +267,7 @@ extension HZTableViewModel: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         guard let titleForDeleteConfirmationButtonForRowHandler = cellModel?.titleForDeleteConfirmationButtonForRowHandler else {
             return cellModel?.titleForDeleteConfirmationButton
         }
@@ -286,7 +276,7 @@ extension HZTableViewModel: UITableViewDelegate {
     
 //    @available(iOS, introduced: 8.0, deprecated: 13.0)
 //    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        guard let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath), let editActionsForRowHandler = cellModel.editActionsForRowHandler else {
+//        guard let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let editActionsForRowHandler = cellModel.editActionsForRowHandler else {
 //            return nil
 //        }
 //        return editActionsForRowHandler(tableView, indexPath)
@@ -294,18 +284,26 @@ extension HZTableViewModel: UITableViewDelegate {
     
     @available(iOS 11.0, *)
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let cellModel = getCellModelForIndexPath(tableView, indexPath: indexPath), let leadingSwipeActionsConfigurationForRowHandler = cellModel.leadingSwipeActionsConfigurationForRowHandler else { return nil }
-        return leadingSwipeActionsConfigurationForRowHandler(tableView, indexPath)
+        guard let cellModel = cellModelForIndexPath(tableView, indexPath: indexPath), let leadingSwipeActionsConfigurationForRowHandler = cellModel.leadingSwipeActionsConfigurationForRowHandler else { return nil }
+        if let leadingActions = leadingSwipeActionsConfigurationForRowHandler(tableView, indexPath)?.actions, !leadingActions.isEmpty {
+            return UISwipeActionsConfiguration(actions: leadingActions)
+        } else {
+            return nil
+        }
     }
     
     @available(iOS 11.0, *)
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let cellModel = getCellModelForIndexPath(tableView, indexPath: indexPath), let trailingSwipeActionsConfigurationForRowHandler = cellModel.trailingSwipeActionsConfigurationForRowHandler else { return nil }
-        return trailingSwipeActionsConfigurationForRowHandler(tableView, indexPath)
+        guard let cellModel = cellModelForIndexPath(tableView, indexPath: indexPath), let trailingSwipeActionsConfigurationForRowHandler = cellModel.trailingSwipeActionsConfigurationForRowHandler else { return nil }
+        if let trailingActions = trailingSwipeActionsConfigurationForRowHandler(tableView, indexPath)?.actions, !trailingActions.isEmpty {
+            return UISwipeActionsConfiguration(actions: trailingActions)
+        } else {
+            return nil
+        }
     }
 
     public func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         if let shouldIndentWhileEditingRowHandler = cellModel?.shouldIndentWhileEditingRowHandler {
             cellModel?.isShouldIndentWhileEditingRow = shouldIndentWhileEditingRowHandler(tableView, indexPath)
         }
@@ -313,12 +311,12 @@ extension HZTableViewModel: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         cellModel?.willBeginEditingRowHandler?(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         cellModel?.didEndEditingRowHandler?(tableView, indexPath)
     }
 
@@ -327,7 +325,7 @@ extension HZTableViewModel: UITableViewDelegate {
 //  func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int
 
     public func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         if let shouldShowMenuForRowHandler = cellModel?.shouldShowMenuForRowHandler {
             cellModel?.isShouldShowMenuForRow = shouldShowMenuForRowHandler(tableView, indexPath)
         }
@@ -339,7 +337,7 @@ extension HZTableViewModel: UITableViewDelegate {
 //  func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?)
 
     public func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         if let canFocusRowHandler = cellModel?.canFocusRowHandler {
             cellModel?.isCanFocusRow = canFocusRowHandler(tableView, indexPath)
         }
@@ -347,14 +345,12 @@ extension HZTableViewModel: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
-        if let shouldUpdateFocusInHandler = self.shouldUpdateFocusInHandler {
-            self.isShouldUpdateFocusIn = shouldUpdateFocusInHandler(tableView, context)
-        }
-        return self.isShouldUpdateFocusIn
+        isShouldUpdateFocusIn = shouldUpdateFocusInHandler?(tableView, context) ?? false
+        return isShouldUpdateFocusIn
     }
 
     public func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        self.didUpdateFocusInHandler?(tableView, context, coordinator)
+        didUpdateFocusInHandler?(tableView, context, coordinator)
     }
 
     public func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
@@ -397,14 +393,14 @@ extension HZTableViewModel: UITableViewDelegate {
 extension HZTableViewModel: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionModel = self.getSectionModelForSection(tableView, section: section) else {
+        guard let sectionModel = self.sectionModelForSection(tableView, section: section) else {
             return 0
         }
         return sectionModel.cellModelArray.count
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath), let cellForRowHandler = cellModel.cellForRowHandler else {
+        guard let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let cellForRowHandler = cellModel.cellForRowHandler else {
             return UITableViewCell()
         }
         return cellForRowHandler(tableView, indexPath)
@@ -415,7 +411,7 @@ extension HZTableViewModel: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let sectionModel = self.getSectionModelForSection(tableView, section: section) else {
+        guard let sectionModel = self.sectionModelForSection(tableView, section: section) else {
             return nil
         }
         if let titleForHeaderInSectionHandler = sectionModel.titleForHeaderInSectionHandler {
@@ -425,7 +421,7 @@ extension HZTableViewModel: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        guard let sectionModel = self.getSectionModelForSection(tableView, section: section) else {
+        guard let sectionModel = self.sectionModelForSection(tableView, section: section) else {
             return nil
         }
         if let titleForFooterInSectionHandler = sectionModel.titleForFooterInSectionHandler {
@@ -435,7 +431,7 @@ extension HZTableViewModel: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         if let canEditRowHandler = cellModel?.canEditRowHandler {
             cellModel?.isCanEdit = canEditRowHandler(tableView, indexPath)
         }
@@ -443,7 +439,7 @@ extension HZTableViewModel: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        let cellModel = self.getCellModelForIndexPath(tableView, indexPath: indexPath)
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         if let canMoveRowHandler = cellModel?.canMoveRowHandler {
             cellModel?.isCanMove = canMoveRowHandler(tableView, indexPath)
         }
