@@ -285,21 +285,13 @@ extension HZTableViewModel: UITableViewDelegate {
     @available(iOS 11.0, *)
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let cellModel = cellModelForIndexPath(tableView, indexPath: indexPath), let leadingSwipeActionsConfigurationForRowHandler = cellModel.leadingSwipeActionsConfigurationForRowHandler else { return nil }
-        if let leadingActions = leadingSwipeActionsConfigurationForRowHandler(tableView, indexPath)?.actions, !leadingActions.isEmpty {
-            return UISwipeActionsConfiguration(actions: leadingActions)
-        } else {
-            return nil
-        }
+        return leadingSwipeActionsConfigurationForRowHandler(tableView, indexPath)
     }
     
     @available(iOS 11.0, *)
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let cellModel = cellModelForIndexPath(tableView, indexPath: indexPath), let trailingSwipeActionsConfigurationForRowHandler = cellModel.trailingSwipeActionsConfigurationForRowHandler else { return nil }
-        if let trailingActions = trailingSwipeActionsConfigurationForRowHandler(tableView, indexPath)?.actions, !trailingActions.isEmpty {
-            return UISwipeActionsConfiguration(actions: trailingActions)
-        } else {
-            return nil
-        }
+        return trailingSwipeActionsConfigurationForRowHandler(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
