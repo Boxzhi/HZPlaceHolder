@@ -107,17 +107,17 @@ public class HZTableViewModel: NSObject {
     
     //MARK: 初始化
     fileprivate func sectionModelForSection(_ tableView: UITableView, section: Int) -> HZTableViewSectionModel? {
-        let sectionsSnapshot = sectionModelArray
-        guard section >= 0 && section < sectionsSnapshot.count else { return nil }
-        return sectionsSnapshot[section]
+        let sectionModelSnapshot = sectionModelArray
+        guard section >= 0 && section < sectionModelSnapshot.count else { return nil }
+        return sectionModelSnapshot[section]
     }
     
     fileprivate func cellModelForIndexPath(_ tableView: UITableView, indexPath: IndexPath?) -> HZTableViewCellModel? {
         guard let indexPath else { return nil }
         guard let sectionModel = sectionModelForSection(tableView, section: indexPath.section) else { return nil }
-        let cellModelsSnapshot = sectionModel.cellModelArray
-        guard indexPath.row >= 0 && indexPath.row < cellModelsSnapshot.count else { return nil }
-        return cellModelsSnapshot[indexPath.row]
+        let cellModelSnapshot = sectionModel.cellModelArray
+        guard indexPath.row >= 0 && indexPath.row < cellModelSnapshot.count else { return nil }
+        return cellModelSnapshot[indexPath.row]
     }
     
 }
