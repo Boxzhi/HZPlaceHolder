@@ -126,39 +126,33 @@ public class HZTableViewModel: NSObject {
 extension HZTableViewModel: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath) {
-            cellModel.willDisplayCellHandler?(tableView, cell, indexPath)
-        }
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
+        cellModel?.willDisplayCellHandler?(tableView, cell, indexPath)
     }
     
     public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let sectionModel = self.sectionModelForSection(tableView, section: section) {
-            sectionModel.willDisplayHeaderViewHandler?(tableView, view, section)
-        }
+        let sectionModel = self.sectionModelForSection(tableView, section: section)
+        sectionModel?.willDisplayHeaderViewHandler?(tableView, view, section)
     }
     
     public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        if let sectionModel = self.sectionModelForSection(tableView, section: section) {
-            sectionModel.willDisplayFooterViewHandler?(tableView, view, section)
-        }
+        let sectionModel = self.sectionModelForSection(tableView, section: section)
+        sectionModel?.willDisplayFooterViewHandler?(tableView, view, section)
     }
     
     public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath) {
-            cellModel.didEndDisplayingCellHandler?(tableView, cell, indexPath)
-        }
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
+        cellModel?.didEndDisplayingCellHandler?(tableView, cell, indexPath)
     }
     
     public func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        if let sectionModel = self.sectionModelForSection(tableView, section: section) {
-            sectionModel.didEndDisplayingHeaderViewHandler?(tableView, view, section)
-        }
+        let sectionModel = self.sectionModelForSection(tableView, section: section)
+        sectionModel?.didEndDisplayingHeaderViewHandler?(tableView, view, section)
     }
     
     public func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        if let sectionModel = self.sectionModelForSection(tableView, section: section) {
-            sectionModel.didEndDisplayingFooterViewHandler?(tableView, view, section)
-        }
+        let sectionModel = self.sectionModelForSection(tableView, section: section)
+        sectionModel?.didEndDisplayingFooterViewHandler?(tableView, view, section)
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -174,15 +168,21 @@ extension HZTableViewModel: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard let sectionModel = sectionModelForSection(tableView, section: section) else { return 0.01 }
-        sectionModel.headerHeight = sectionModel.heightForHeaderInSectionHandler?(tableView, section) ?? sectionModel.headerHeight
-        return sectionModel.headerHeight
+        let sectionModel = sectionModelForSection(tableView, section: section)
+        if let heightForHeaderInSectionHandler = sectionModel?.heightForHeaderInSectionHandler {
+            return heightForHeaderInSectionHandler(tableView, section)
+        }else {
+            return sectionModel?.headerHeight ?? 0.01
+        }
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        guard let sectionModel = sectionModelForSection(tableView, section: section) else { return 0.01 }
-        sectionModel.footerHeight = sectionModel.heightForFooterInSectionHandler?(tableView, section) ?? sectionModel.footerHeight
-        return sectionModel.footerHeight
+        let sectionModel = sectionModelForSection(tableView, section: section)
+        if let heightForFooterInSectionHandler = sectionModel?.heightForFooterInSectionHandler {
+            return heightForFooterInSectionHandler(tableView, section)
+        }else {
+            return sectionModel?.footerHeight ?? 0.01
+        }
     }
 
 //    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -205,17 +205,19 @@ extension HZTableViewModel: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionModel = self.sectionModelForSection(tableView, section: section)
         if let viewForHeaderHandler = sectionModel?.viewForHeaderHandler {
-            sectionModel?.headerView = viewForHeaderHandler(tableView, section)
+            return viewForHeaderHandler(tableView, section)
+        }else {
+            return sectionModel?.headerView
         }
-        return sectionModel?.headerView
     }
 
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let sectionModel = self.sectionModelForSection(tableView, section: section)
         if let viewForFooterHandler = sectionModel?.viewForFooterHandler {
-            sectionModel?.footerView = viewForFooterHandler(tableView, section)
+            return viewForFooterHandler(tableView, section)
+        }else {
+            return sectionModel?.footerView
         }
-        return sectionModel?.footerView
     }
 
 //    public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath)
@@ -223,29 +225,31 @@ extension HZTableViewModel: UITableViewDelegate {
 //    public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool
 
     public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let didHighlightRowHandler = cellModel.didHighlightRowHandler {
-            didHighlightRowHandler(tableView, indexPath)
-        }
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
+        cellModel?.didHighlightRowHandler?(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let didUnhighlightRowHandler = cellModel.didUnhighlightRowHandler {
-            didUnhighlightRowHandler(tableView, indexPath)
-        }
+        let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
+        cellModel?.didUnhighlightRowHandler?(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        guard let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let handler = cellModel.willSelectRowHandler else {
+        guard let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath) else { return nil }
+        if let willSelectRowHandler = cellModel.willSelectRowHandler {
+            return willSelectRowHandler(tableView, indexPath)
+        }else {
             return indexPath
         }
-        return handler(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
-        guard let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath), let handler = cellModel.willDeselectRowHandler else {
+        guard let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath) else { return nil }
+        if let willDeselectRowHandler = cellModel.willDeselectRowHandler {
+            return willDeselectRowHandler(tableView, indexPath)
+        }else {
             return indexPath
         }
-        return handler(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -260,18 +264,22 @@ extension HZTableViewModel: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
-        guard let editingStyleForRowHandler = cellModel?.editingStyleForRowHandler else {
-            return cellModel?.editingStyle ?? .none
+        if let editingStyleForRowHandler = cellModel?.editingStyleForRowHandler {
+            return editingStyleForRowHandler(tableView, indexPath)
+        }else if let editingStyle = cellModel?.editingStyle {
+            return editingStyle
+        }else {
+            return .none
         }
-        return editingStyleForRowHandler(tableView, indexPath)
     }
 
     public func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
-        guard let titleForDeleteConfirmationButtonForRowHandler = cellModel?.titleForDeleteConfirmationButtonForRowHandler else {
+        if let titleForDeleteConfirmationButtonForRowHandler = cellModel?.titleForDeleteConfirmationButtonForRowHandler {
+            return titleForDeleteConfirmationButtonForRowHandler(tableView, indexPath)
+        }else {
             return cellModel?.titleForDeleteConfirmationButton
         }
-        return titleForDeleteConfirmationButtonForRowHandler(tableView, indexPath)
     }
     
 //    @available(iOS, introduced: 8.0, deprecated: 13.0)
@@ -297,9 +305,10 @@ extension HZTableViewModel: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         if let shouldIndentWhileEditingRowHandler = cellModel?.shouldIndentWhileEditingRowHandler {
-            cellModel?.isShouldIndentWhileEditingRow = shouldIndentWhileEditingRowHandler(tableView, indexPath)
+            return shouldIndentWhileEditingRowHandler(tableView, indexPath)
+        }else {
+            return cellModel?.isShouldIndentWhileEditingRow ?? false
         }
-        return cellModel?.isShouldIndentWhileEditingRow ?? false
     }
 
     public func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
@@ -319,9 +328,10 @@ extension HZTableViewModel: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         if let shouldShowMenuForRowHandler = cellModel?.shouldShowMenuForRowHandler {
-            cellModel?.isShouldShowMenuForRow = shouldShowMenuForRowHandler(tableView, indexPath)
+            return shouldShowMenuForRowHandler(tableView, indexPath)
+        }else {
+            return cellModel?.isShouldShowMenuForRow ?? false
         }
-        return cellModel?.isShouldShowMenuForRow ?? false
     }
 
 //  func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool
@@ -331,14 +341,18 @@ extension HZTableViewModel: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         let cellModel = self.cellModelForIndexPath(tableView, indexPath: indexPath)
         if let canFocusRowHandler = cellModel?.canFocusRowHandler {
-            cellModel?.isCanFocusRow = canFocusRowHandler(tableView, indexPath)
+            return canFocusRowHandler(tableView, indexPath)
+        }else {
+            return cellModel?.isCanFocusRow ?? false
         }
-        return cellModel?.isCanFocusRow ?? false
     }
 
     public func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
-        isShouldUpdateFocusIn = shouldUpdateFocusInHandler?(tableView, context) ?? false
-        return isShouldUpdateFocusIn
+        if let shouldUpdateFocusInHandler = shouldUpdateFocusInHandler {
+            return shouldUpdateFocusInHandler(tableView, context)
+        }else {
+            return isShouldUpdateFocusIn
+        }
     }
 
     public func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
@@ -471,62 +485,63 @@ extension HZTableViewModel: UITableViewDataSource {
 extension HZTableViewModel: UIScrollViewDelegate {
 
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.scrollViewDidScrollHandler?(scrollView)
+        scrollViewDidScrollHandler?(scrollView)
     }
 
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        self.scrollViewDidZoomHandler?(scrollView)
+        scrollViewDidZoomHandler?(scrollView)
     }
 
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.scrollViewWillBeginDraggingHandler?(scrollView)
+        scrollViewWillBeginDraggingHandler?(scrollView)
     }
 
     public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        self.scrollViewWillEndDraggingHandler?(scrollView, velocity, targetContentOffset)
+        scrollViewWillEndDraggingHandler?(scrollView, velocity, targetContentOffset)
     }
 
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        self.scrollViewDidEndDraggingHandler?(scrollView, decelerate)
+        scrollViewDidEndDraggingHandler?(scrollView, decelerate)
     }
 
     public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewWillBeginDeceleratingHandler?(scrollView)
+        scrollViewWillBeginDeceleratingHandler?(scrollView)
     }
 
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDidEndDeceleratingHandler?(scrollView)
+        scrollViewDidEndDeceleratingHandler?(scrollView)
     }
 
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        self.scrollViewDidEndScrollingAnimationHandler?(scrollView)
+        scrollViewDidEndScrollingAnimationHandler?(scrollView)
     }
     
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        self.viewForZoomingHandler?(scrollView)
+        viewForZoomingHandler?(scrollView)
     }
 
     public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-        self.scrollViewWillBeginZoomingHandler?(scrollView, view)
+        scrollViewWillBeginZoomingHandler?(scrollView, view)
     }
 
     public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        self.scrollViewDidEndZoomingHandler?(scrollView, view, scale)
+        scrollViewDidEndZoomingHandler?(scrollView, view, scale)
     }
 
     public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        if let _isShouldScrollToTop = self.scrollViewShouldScrollToTopHandler?(scrollView) {
-            self.isShouldScrollToTop = _isShouldScrollToTop
+        if let scrollViewShouldScrollToTopHandler = scrollViewShouldScrollToTopHandler {
+            return scrollViewShouldScrollToTopHandler(scrollView)
+        }else {
+            return isShouldScrollToTop
         }
-        return self.isShouldScrollToTop
     }
 
     public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        self.scrollViewDidScrollToTopHandler?(scrollView)
+        scrollViewDidScrollToTopHandler?(scrollView)
     }
     
     public func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
-        self.scrollViewDidChangeAdjustedContentInsetHandler?(scrollView)
+        scrollViewDidChangeAdjustedContentInsetHandler?(scrollView)
     }
     
 }
@@ -616,7 +631,7 @@ public class HZTableViewCellModel: NSObject {
     
     public var height: CGFloat = 40.0
     public var editingStyle: UITableViewCell.EditingStyle = .none
-    public var titleForDeleteConfirmationButton: String = "删除"
+    public var titleForDeleteConfirmationButton: String?
     public var isShouldIndentWhileEditingRow: Bool = false
     public var isShouldShowMenuForRow: Bool = false
     public var isCanFocusRow: Bool = false
