@@ -46,28 +46,38 @@ public extension HZTableViewPlaceHolderDelegate {
     }
 }
 
+final class WeakBox {
+    weak var value: AnyObject?
+    init(_ value: AnyObject?) {
+        self.value = value
+    }
+}
+
 extension UITableView {
     
     private struct AssociatedKeys {
-        static var placeHolderView = "AKPlaceHolderView"
-        static var placeHolderDelegate = "AKPlaceHolderDelegate"
+        static var placeHolderView: UInt8 = 0
+        static var placeHolderDelegate: UInt8 = 0
     }
     
     private var placeHolderView: UIView? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.placeHolderView) as? UIView
+            objc_getAssociatedObject(self, &AssociatedKeys.placeHolderView) as? UIView
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.placeHolderView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self, &AssociatedKeys.placeHolderView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
         }
     }
     
-    private weak var placeHolderDelegate: HZTableViewPlaceHolderDelegate? {
+    private var placeHolderDelegate: HZTableViewPlaceHolderDelegate? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.placeHolderDelegate) as? HZTableViewPlaceHolderDelegate
+            (objc_getAssociatedObject(self, &AssociatedKeys.placeHolderDelegate) as? WeakBox)?.value as? HZTableViewPlaceHolderDelegate
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.placeHolderDelegate, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(
+                self, &AssociatedKeys.placeHolderDelegate, WeakBox(newValue), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -84,8 +94,8 @@ extension UITableView {
         let src: UITableViewDataSource? = self.dataSource
         let delegate: UITableViewDelegate? = self.delegate
         
-        if let _src = src, self.placeHolderDelegate == nil  {
-            self.placeHolderDelegate = _src as? HZTableViewPlaceHolderDelegate
+        if placeHolderDelegate == nil, let _src = src as? HZTableViewPlaceHolderDelegate {
+            self.placeHolderDelegate = _src
         }
         
         if let sections = src?.numberOfSections?(in: self) {   // 若代理实现了numberOfSections方法, 默认有多个分组, 需先判断section是否为0
