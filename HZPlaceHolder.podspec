@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/Boxzhi/HZPlaceHolder'
   s.author = { 'HeZhizhi' => 'coderhzz@163.com' }
   s.social_media_url = 'https://www.jianshu.com/u/9767e7dda727'
-  s.source = { :git => 'git@github.com:Boxzhi/HZPlaceHolder.git', :tag => s.version.to_s }
+  s.source = { :git => 'https://github.com/Boxzhi/HZPlaceHolder.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
   s.framework = 'UIKit'
