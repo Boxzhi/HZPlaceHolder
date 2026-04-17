@@ -8,15 +8,53 @@
 
 
 # 要求
-- iOS 10.0+
-- Xcode 10.1+
-- Swift 4.2+
+- iOS 11.0+
+- Xcode 14.0+
+- Swift 5.0+
 
 
 # 安装
+
+### CocoaPods
 - 如果你只需要MJRefresh的封装工具，在文件 `Podfile` 中加入 `pod 'HZPlaceHolder/Refresh'` 
 - 如果你只需要空数据占位图工具，在文件 `Podfile` 中加入 `pod 'HZPlaceHolder/PlaceHolderView'` 
 - 如果你两者皆需，则在文件 `Podfile` 中加入 `pod 'HZPlaceHolder'` 
+
+### Swift Package Manager
+
+在 Xcode 中选择 `File` -> `Add Packages...`，然后添加仓库地址：
+
+`https://github.com/Boxzhi/HZPlaceHolder.git`
+
+也可以在 `Package.swift` 中添加：
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/Boxzhi/HZPlaceHolder.git", from: "1.3.3")
+]
+```
+
+然后在 target 中引用：
+
+```swift
+targets: [
+    .target(
+        name: "YourTarget",
+        dependencies: [
+            .product(name: "HZPlaceHolder", package: "HZPlaceHolder")
+        ]
+    )
+]
+```
+
+SPM 当前提供的是单一模块：
+
+`import HZPlaceHolder`
+
+说明：
+- `PlaceHolderView` 和 `Refresh` 都包含在 `HZPlaceHolder` 这个模块里
+- `Refresh` 依赖 `MJRefresh`，通过 SPM 集成 `HZPlaceHolder` 时会自动拉取，无需单独添加
+- CocoaPods 支持按 subspec 拆分；SPM 暂不区分子模块
 
 
 # 用法
@@ -34,6 +72,36 @@
 - 第三步：实现代理方法：
    - `func makePlaceHolderView() -> UIView?`  ---->  返回自定义View，也可使用 `HZPlaceHolderView`创建返回
    - `func enableScrollWhenPlaceHolderViewShowing() -> Bool`  ---->  当数据为空时是否可滚动，默认为true
+
+示例：
+
+```swift
+import HZPlaceHolder
+
+final class DemoViewController: UIViewController, HZTableViewPlaceHolderDelegate {
+
+    @IBOutlet private weak var tableView: UITableView!
+    private var dataSource: [String] = []
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.hz_reloadData()
+    }
+
+    func makePlaceHolderView() -> UIView? {
+        HZPlaceHolderView.create(
+            image: UIImage(named: "empty"),
+            titleAttr: NSAttributedString(
+                string: "暂无数据",
+                attributes: [
+                    .font: UIFont.systemFont(ofSize: 16),
+                    .foregroundColor: UIColor.gray
+                ]
+            )
+        )
+    }
+}
+```
 
 
 ② HZTableViewModel使用方法：
@@ -68,6 +136,21 @@ PlaceHolderView中已封装了 `HZPlaceHolderView`，使用方法如下：
 
 
 ### Refresh.
+
+SPM 或 CocoaPods 集成后都直接：
+
+```swift
+import HZPlaceHolder
+```
+
+示例：
+
+```swift
+tableView.hz.normalRefreshWithHeader(true,
+                                     refreshHeader: HZRefreshNormalHeader.self) {
+    // 下拉刷新
+}
+```
 
 ```
 /**
